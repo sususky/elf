@@ -5,7 +5,10 @@ import com.su.common.utils.DateUtil;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Hello world!
@@ -15,8 +18,10 @@ public class CommonTest {
 
     @Test
     public void test() {
-        String time = "2018-08-16 10:00-11:00";
-        System.out.println(time.substring(0, 16));
+        String str = "8617857475170";
+        System.out.println(str.substring(2));
+
+
         /*
         long now = System.currentTimeMillis();
         System.out.println(now);

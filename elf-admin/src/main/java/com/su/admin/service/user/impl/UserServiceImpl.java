@@ -8,7 +8,6 @@ import com.su.admin.service.rest.RestService;
 import com.su.admin.service.user.UserService;
 import com.su.common.entity.SearchParam;
 import com.su.sso.entity.SsoUser;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

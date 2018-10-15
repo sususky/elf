@@ -52,7 +52,7 @@ CREATE TABLE `user` (
   `create_time` timestamp NOT NULL DEFAULT '2017-01-01 00:00:00',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `USER_account_uindex` (`account`)
+  UNIQUE KEY `user_account_uk` (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -69,4 +69,21 @@ CREATE TABLE `log` (
   `user` varchar(32) DEFAULT '' COMMENT '操作人',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 区域表
+DROP TABLE IF EXISTS `region`;
+CREATE TABLE `region` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `level` tinyint NOT NULL DEFAULT 0 COMMENT '1国家 2省份 3市 4区县 5其他',
+  `code` int unsigned NOT NULL DEFAULT 0,
+  `parent_code` int unsigned NOT NULL DEFAULT 0,
+  `name` varchar(128) NOT NULL DEFAULT '',
+  `longitude` double NOT NULL DEFAULT 0,
+  `latitude` double NOT NULL DEFAULT 0,
+  `create_time` timestamp NOT NULL DEFAULT '2017-01-01 00:00:00',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `region_code_uk` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
