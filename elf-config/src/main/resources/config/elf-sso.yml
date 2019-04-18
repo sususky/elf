@@ -1,6 +1,6 @@
 spring:
   redis:
-    host: 172.18.36.120
+    host: '{cipher}d803ae11812fd443d4706da5666e9028d41927c3b4b7f911701a865929c27902'
     database: 0
 
 
