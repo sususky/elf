@@ -1,16 +1,31 @@
 server:
   port: 8071
-
+  
 spring:
   cloud:
     config:
       server:
         native:
-          search-locations: classpath:config/ # ËÑË÷src/main/resources ÏÂµÄconfigÎÄ¼ş¼ĞÏÂµÄÎÄ¼ş
+          search-locations: classpath:config/ # æœç´¢src/main/resource ä¸‹çš„propertiesæ–‡ä»¶å¤¹ä¸‹çš„æ–‡ä»¶
   application:
     name: elf-config
   profiles:
     active: native
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+
 encrypt:
-  key: elf.su    # ÉèÖÃÁËÒ»¸ö¼ÓÃÜµÄ·ÃÎÊÃÜÔ¿
+  key: elf.susu    # è®¾ç½®äº†ä¸€ä¸ªåŠ å¯†çš„è®¿é—®å¯†é’¥
+#  keyStore:
+#    location: classpath:/server.jks
+#    password: letmein
+#    alias: mytestkey
+#    secret: changeme
+
+
+#logging:
+#  level:
+#    org.springframework: debug

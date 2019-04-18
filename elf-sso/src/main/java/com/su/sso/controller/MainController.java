@@ -1,10 +1,12 @@
 package com.su.sso.controller;
 
+import com.netflix.discovery.converters.Auto;
 import com.su.common.entity.ResponseMessage;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,14 @@ public class MainController {
 
     @Autowired
     TokenStore tokenStore;
+
+    @Value("${wechat.appSecret}")
+    String appSecret;
+
+    @RequestMapping("/index")
+    public ResponseMessage index() {
+        return ResponseMessage.ok().put("appSeret", appSecret);
+    }
 
     @RequestMapping("/oauth/logout")
     public ResponseMessage logout(HttpServletRequest request) {

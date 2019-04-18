@@ -1,17 +1,8 @@
-server:
-  port: 8081
-
 spring:
-  application:
-    name: sso
   redis:
     host: 172.18.36.120
     database: 0
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8070/eureka/
 
 logging:
   level:
@@ -21,4 +12,4 @@ logging:
 
 wechat:
   appId: 12345
-  appSecret: '{cipher}8742583da780b5994db1ed4f56dd5736205b3ce47b65ad5c8a6ab7a7e2d9a88e'
+  appSecret: '{cipher}a68e844cb07bdc673fe1027c7541411ad8e5ddedd70a857d0d4c884833ed5c5b'
