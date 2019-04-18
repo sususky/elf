@@ -1,4 +1,4 @@
-package com.su.sso;
+package com.su.sso.common;
 
 /**
  * @author surongyao

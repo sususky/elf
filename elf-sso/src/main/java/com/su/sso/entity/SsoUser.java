@@ -1,71 +1,107 @@
 package com.su.sso.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 import java.util.List;
 
-public class SsoUser {
+/**
+ * @author surongyao
+ * @date 2019-01-02 16:13
+ * @desc
+ */
+public class SsoUser implements UserDetails {
 
-	private int id;
-	private String account;
-	private String passWord;
-	private int roleId;
-	private int isSuper;
-	private int readOnly;
-	private List<String> privileges;
+    private String username;
+    private String password;
+    private List<Authorities> authorities;  //权限
+    private int roleId;
+    private String roleName;
+    private int isSuper;
+    private int readOnly;
 
-	public int getId() {
-		return id;
-	}
+    public void setUsername(String username){
+        this.username = username;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setPassword(String password){
+        this.password = password;
+    }
 
-	public String getAccount() {
-		return account;
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
 
-	public void setAccount(String account) {
-		this.account = account;
-	}
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
 
-	public String getPassWord() {
-		return passWord;
-	}
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
 
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
-	}
+    public void setAuthorities(List<Authorities> authorities) {
+        this.authorities = authorities;
+    }
 
-	public int getRoleId() {
-		return roleId;
-	}
+    public int getRoleId() {
+        return roleId;
+    }
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
 
-	public int getIsSuper() {
-		return isSuper;
-	}
+    public String getRoleName() {
+        return roleName;
+    }
 
-	public void setIsSuper(int isSuper) {
-		this.isSuper = isSuper;
-	}
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
-	public int getReadOnly() {
-		return readOnly;
-	}
+    public int getIsSuper() {
+        return isSuper;
+    }
 
-	public void setReadOnly(int readOnly) {
-		this.readOnly = readOnly;
-	}
+    public void setIsSuper(int isSuper) {
+        this.isSuper = isSuper;
+    }
 
-	public List<String> getPrivileges() {
-		return privileges;
-	}
+    public int getReadOnly() {
+        return readOnly;
+    }
 
-	public void setPrivileges(List<String> privileges) {
-		this.privileges = privileges;
-	}
+    public void setReadOnly(int readOnly) {
+        this.readOnly = readOnly;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        //账户是否未过期
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        //账户是否未锁定
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        //凭证(密码)是否未过期
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        //用户是否启用
+        return true;
+    }
 
 }

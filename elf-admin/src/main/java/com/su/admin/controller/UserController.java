@@ -7,7 +7,6 @@ import com.su.common.entity.ResponseMessage;
 import com.su.common.entity.SearchParam;
 import com.su.common.exception.CommonException;
 import com.su.sso.entity.SsoUser;
-import com.su.sso.service.auth.AuthService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,24 +34,22 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    AuthService authService;
 
 
     @RequestMapping("/psw")
     public ResponseMessage changePwd(HttpServletRequest request, String oldPsw, String newPsw){
-        String token = authService.fetchToken(request);
-        String account = authService.getUserAccount(token);
+        String token = null;//authService.fetchToken(request);
+        String account = null;//authService.getUserAccount(token);
         if(StringUtils.isAnyEmpty(oldPsw, newPsw)){
             throw new IllegalArgumentException("参数为空");
         }
         SsoUser user = userService.getByName(account);
         JSONObject result;
         if(user!=null){
-            if(oldPsw.equalsIgnoreCase(user.getPassWord())){
-                user.setPassWord(newPsw);
+            if(oldPsw.equalsIgnoreCase(user.getPassword())){
+                user.setPassword(newPsw);
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", user.getId());
+                //jsonObject.put("id", user.getId());
                 jsonObject.put("password", newPsw);
                 result = userService.updatePojo(jsonObject);
             }else{

@@ -57,10 +57,7 @@
             <groupId>com.su</groupId>
             <artifactId>elf-common</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.su</groupId>
-            <artifactId>elf-sso</artifactId>
-        </dependency>
+
 
     </dependencies>
 

@@ -2,11 +2,9 @@ package com.su.admin.interceptor;
 
 import com.su.common.CodeEnum;
 import com.su.common.exception.CommonException;
-import com.su.sso.service.auth.AuthService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -28,8 +26,6 @@ public class LoginlerInterceptor extends HandlerInterceptorAdapter {
     @Value("${auth.excludes}")
     String excludes;
 
-    @Autowired
-    AuthService authService;
 
 
     @Override
@@ -64,7 +60,7 @@ public class LoginlerInterceptor extends HandlerInterceptorAdapter {
             }
         }
 
-        boolean flag = authService.check(request);
+        boolean flag = true;
 
         if(flag){
             logger.info("uri: [{}]校验通过", uri);

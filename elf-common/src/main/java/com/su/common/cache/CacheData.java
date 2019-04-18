@@ -1,4 +1,4 @@
-package com.su.sso.cache;
+package com.su.common.cache;
 
 /**
  * @author surongyao

@@ -16,6 +16,10 @@
     <name>elf-common</name>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
         <!-- apache common -->
         <dependency>
             <groupId>commons-net</groupId>

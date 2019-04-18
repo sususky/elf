@@ -9,7 +9,6 @@ import com.su.common.redis.RedisDao;
 import com.su.common.utils.CaptchaUtil;
 import com.su.common.utils.RegexUtil;
 import com.su.sso.entity.SsoUser;
-import com.su.sso.service.auth.AuthService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +21,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @RestController
 public class LoginController {
@@ -32,8 +30,6 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    AuthService authService;
 
     @Autowired
     PrivilegeService privilegeService;
@@ -86,15 +82,15 @@ public class LoginController {
         SsoUser user = userService.getByName(account);
 
         if(user!=null){
-            if(!StringUtils.isAnyEmpty(password, user.getPassWord())
-                    && user.getPassWord().equals(password)){
-                if(user.getIsSuper()!=1){
-                    List<String> list = privilegeService.getPrivilegeByRoleId(user.getRoleId());
-                    if(list!=null && list.size()>0){
-                        user.setPrivileges(list);
-                    }
-                }
-                String token = authService.generateToken(request, user);
+            if(!StringUtils.isAnyEmpty(password, user.getPassword())
+                    && user.getPassword().equals(password)){
+//                if(user.getIsSuper()!=1){
+//                    List<String> list = privilegeService.getPrivilegeByRoleId(user.getRoleId());
+//                    if(list!=null && list.size()>0){
+//                        user.setPrivileges(list);
+//                    }
+//                }
+                String token = null ;// authService.generateToken(request, user);
                 Cookie cookie = new Cookie("token", token);
                 cookie.setPath("/");
                 cookie.setMaxAge(-1);
@@ -105,7 +101,7 @@ public class LoginController {
                 JSONObject jsonObject = new JSONObject();
                 //jsonObject.put("id", user.getId());
                 jsonObject.put("token", token);
-                user.setPassWord(null);
+                user.setPassword(null);
                 jsonObject.put("user", user);
                 //jsonObject.put("privileges", user.getPrivaleges());
                 return ResponseMessage.ok(jsonObject);//.put("token", "").put("user", user);
@@ -122,9 +118,9 @@ public class LoginController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ResponseMessage logout(HttpServletRequest request){
-        String token = authService.fetchToken(request);
+        String token = null; //authService.fetchToken(request);
         if(StringUtils.isNotEmpty(token)){
-            authService.expireToken(token);
+            //authService.expireToken(token);
         }
 
         return ResponseMessage.ok();

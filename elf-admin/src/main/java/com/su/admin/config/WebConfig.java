@@ -2,8 +2,6 @@ package com.su.admin.config;
 
 import com.su.admin.interceptor.LoginlerInterceptor;
 import com.su.common.redis.RedisDao;
-import com.su.sso.service.auth.AuthService;
-import com.su.sso.service.auth.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -39,13 +37,6 @@ public class WebConfig implements WebMvcConfigurer {
         RedisDao redisDao = new RedisDao();
         redisDao.setRedisTemplate(redisTemplate);
         return redisDao;
-    }
-
-    @Bean
-    public AuthService getAuthServive(){
-        AuthServiceImpl authService = new AuthServiceImpl();
-        authService.setRedisTemplate(redisTemplate);
-        return authService;
     }
 
     @Override

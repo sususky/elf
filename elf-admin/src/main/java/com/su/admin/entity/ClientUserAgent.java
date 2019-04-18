@@ -17,7 +17,7 @@ public class ClientUserAgent {
 
 	public ClientUserAgent(HttpServletRequest request){
 		this.request = request;
-		userAgentString = request.getHeader("User-Agent");
+		userAgentString = request.getHeader("SsoUser-Agent");
 		userAgent = UserAgent.parseUserAgentString(userAgentString);
 	}
 

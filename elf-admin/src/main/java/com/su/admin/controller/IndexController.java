@@ -4,13 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.su.admin.entity.Privilege;
 import com.su.admin.service.privilege.PrivilegeService;
 import com.su.common.entity.ResponseMessage;
-import com.su.sso.service.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -25,9 +22,6 @@ public class IndexController {
     @Autowired
     PrivilegeService privilegeService;
 
-    @Resource
-    AuthService authService;
-
     @Value("${app.version}")
     String version;
 
@@ -39,8 +33,8 @@ public class IndexController {
     @RequestMapping("/menu")
     public ResponseMessage getMenu(HttpServletRequest request){
         List<Privilege> list = privilegeService.getPrivileges();
-        String token = authService.fetchToken(request);
-        boolean flag = authService.isSuper(token);
+        String token = null;//authService.fetchToken(request);
+        boolean flag = false;//authService.isSuper(token);
         JSONObject data = new JSONObject();
 
         if(flag){
@@ -53,7 +47,7 @@ public class IndexController {
             data.put("menus", list);
             return ResponseMessage.ok(data);
         }else{
-            List<String> ps = authService.getPrivileges(token);
+            List<String> ps = null; //authService.getPrivileges(token);
             for(Privilege parent:list){
                 List<Privilege> subs = parent.getSubprivileges();
                 Iterator<Privilege> it = subs.iterator();

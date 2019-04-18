@@ -1,0 +1,16 @@
+server:
+  port: 8071
+
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:config/ # 搜索src/main/resources 下的config文件夹下的文件
+  application:
+    name: elf-config
+  profiles:
+    active: native
+
+encrypt:
+  key: elf.su    # 设置了一个加密的访问密钥

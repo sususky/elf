@@ -44,12 +44,12 @@ public class UserServiceImpl implements UserService {
             if(array!=null && array.size()>0){
                 SsoUser user= new SsoUser();
                 json = array.getJSONObject(0);
-                user.setId(json.getInteger("id"));
-                user.setAccount(json.getString("account"));
-                user.setRoleId(json.getInteger("roleId"));
-                user.setIsSuper(json.getInteger("isSuper"));
-                user.setReadOnly(json.getInteger("readonly"));
-                user.setPassWord(json.getString("password"));
+//                user.setId(json.getInteger("id"));
+//                user.setAccount(json.getString("account"));
+//                user.setRoleId(json.getInteger("roleId"));
+//                user.setIsSuper(json.getInteger("isSuper"));
+//                user.setReadOnly(json.getInteger("readonly"));
+//                user.setPassWord(json.getString("password"));
                 return user;
             }
         }
