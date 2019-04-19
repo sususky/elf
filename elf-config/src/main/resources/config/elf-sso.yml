@@ -1,6 +1,6 @@
 spring:
   redis:
-    host: '{cipher}d803ae11812fd443d4706da5666e9028d41927c3b4b7f911701a865929c27902'
+    host: d803ae11812fd443d4706da5666e9028d41927c3b4b7f911701a865929c27902
     database: 0
 
 
@@ -12,4 +12,4 @@ logging:
 
 wechat:
   appId: 12345
-  appSecret: '{cipher}a68e844cb07bdc673fe1027c7541411ad8e5ddedd70a857d0d4c884833ed5c5b'
+  appSecret: a68e844cb07bdc673fe1027c7541411ad8e5ddedd70a857d0d4c884833ed5c5b

@@ -1,4 +1,4 @@
-package com.su.elf.elfconfig;
+package com.su.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,10 +8,10 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @SpringBootApplication
 @EnableConfigServer
 @EnableDiscoveryClient
-public class ElfConfigApplication {
+public class ConfigApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ElfConfigApplication.class, args);
+        SpringApplication.run(ConfigApplication.class, args);
     }
 
 }

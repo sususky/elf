@@ -8,6 +8,7 @@ spring:
   cloud:
     config:
       uri: http://localhost:8071/
+      fail-fast: true
 
 # 注册中心配置
 eureka:
