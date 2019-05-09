@@ -7,7 +7,6 @@ package com.su.sso.common;
  */
 public class SsoConstants {
 
-    // 没有权限
     public static final int TOKEN_CACHE_SECONDS = 3600;
 
     public static final int MEMORY_CACHE_SECONDS = 60;
