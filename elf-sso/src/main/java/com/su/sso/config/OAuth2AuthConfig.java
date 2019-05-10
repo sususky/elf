@@ -13,6 +13,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
+import javax.sql.DataSource;
+
 /**
  * @author sury
  * Date 2019-01-10
@@ -21,6 +23,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableAuthorizationServer
 public class OAuth2AuthConfig extends AuthorizationServerConfigurerAdapter {
 
+    @Autowired
+    DataSource dataSource;
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -31,12 +35,13 @@ public class OAuth2AuthConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
+//        clients.jdbc(dataSource);
 //        password 方案一：明文存储，用于测试，不能用于生产
 //        String finalSecret = "123456";
 //        password 方案二：用 BCrypt 对密码编码
 //        String finalSecret = new BCryptPasswordEncoder().encode("123456");
         // password 方案三：支持多种编码，通过密码的前缀区分编码方式
+
         String finalSecret = "{bcrypt}"+new BCryptPasswordEncoder().encode("123456");
         //配置两个客户端,一个用于password认证一个用于client认证
         clients.inMemory().withClient("client_1")
@@ -51,6 +56,7 @@ public class OAuth2AuthConfig extends AuthorizationServerConfigurerAdapter {
                 .scopes("select")
                 .authorities("oauth2")
                 .secret(finalSecret);
+
     }
 
     @Override

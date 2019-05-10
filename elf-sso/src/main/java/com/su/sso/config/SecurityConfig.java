@@ -3,6 +3,7 @@ package com.su.sso.config;
 
 import com.su.common.service.RestService;
 import com.su.common.service.impl.RestServiceImpl;
+import com.su.sso.handler.SsoLogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -80,15 +81,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
-        http
-            .requestMatchers().anyRequest()
-            .and()
-                .authorizeRequests()
-                .antMatchers("/oauth/**", "/").permitAll()
-                //.and().logout().logoutUrl("/oauth/logout").logoutSuccessHandler(logoutHandler).invalidateHttpSession(true)
-                .and()
-                .csrf().disable();
-        // @formatter:on
+        http.authorizeRequests()
+                .antMatchers("/oauth/*", "/").permitAll()
+                .anyRequest().authenticated()
+                .and().logout().addLogoutHandler(ssoLogoutHandler())
+                .and().csrf().disable();
     }
+
+    @Bean
+    public SsoLogoutHandler ssoLogoutHandler() {
+        return new SsoLogoutHandler();
+    }
+
 }
