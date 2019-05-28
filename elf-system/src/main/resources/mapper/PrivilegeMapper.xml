@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.su.system.mapper.PrivilegeMapper" >
-    <resultMap id="basePrivilegeMap" type="com.su.system.entity.Privilege" >
+<mapper namespace="com.su.elf.system.mapper.PrivilegeMapper" >
+    <resultMap id="basePrivilegeMap" type="com.su.elf.system.entity.Privilege" >
         <id column="id" property="id" />
         <result column="privilege_name" property="privilegeName" />
         <result column="level" property="level" />
@@ -15,7 +15,7 @@
         id, privilege_name, seq, parent_id, link, category, create_time
     </sql>
 
-    <select id="getList" resultMap="basePrivilegeMap" parameterType="com.su.common.entity.SearchParam" >
+    <select id="getList" resultMap="basePrivilegeMap" parameterType="com.su.elf.common.entity.SearchParam" >
       SELECT <include refid="base_Column_List" /> from privilege where 1=1
         <if test="name!=null and name!='' " >
             AND privilege_name LIKE CONCAT('%',#{name},'%')
@@ -32,7 +32,7 @@
 
     </select>
 
-    <select id="getCount" resultType="int" parameterType="com.su.common.entity.SearchParam" >
+    <select id="getCount" resultType="int" parameterType="com.su.elf.common.entity.SearchParam" >
         SELECT count(*) FROM privilege where 1=1
         <if test="name!=null and name!='' " >
             AND privilege_name LIKE CONCAT('%',#{name},'%')
@@ -51,12 +51,12 @@
 	  FROM privilege WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.su.system.entity.Privilege" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.su.elf.system.entity.Privilege" useGeneratedKeys="true" keyProperty="id">
       INSERT INTO privilege(privilege_name, seq, parent_id, link, category, create_time)
       VALUES (#{privilegeName}, #{seq}, #{parentId}, #{link}, #{category}, now())
     </insert>
     
-    <update id="update" parameterType="com.su.system.entity.Privilege" >
+    <update id="update" parameterType="com.su.elf.system.entity.Privilege" >
        UPDATE privilege SET
         <trim  suffixOverrides=",">
             <if test="privilegeName!=null and privilegeName!='' ">

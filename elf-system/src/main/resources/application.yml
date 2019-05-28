@@ -32,7 +32,7 @@ mybatis:
 #  config-location: classpath:mybatis/mybatis-config.xml
 #  configuration:
 #    interceptors:
-#      - com.su.system.interceptor.mybatis.SqlFetchInterceptor
+#      - SqlFetchInterceptor
 
 
 #

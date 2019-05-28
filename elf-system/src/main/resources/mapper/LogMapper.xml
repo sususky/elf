@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.su.system.mapper.LogMapper">
+<mapper namespace="com.su.elf.system.mapper.LogMapper">
 
-    <resultMap id="logMap" type="com.su.system.entity.Log">
+    <resultMap id="logMap" type="com.su.elf.system.entity.Log">
         <result column="id" property="id" />
         <result column="level" property="level" />
         <result column="module" property="module" />
@@ -24,7 +24,7 @@
         where id = #{id}
     </select>
 
-    <select id="getList" resultMap="logMap" parameterType="com.su.common.entity.SearchParam">
+    <select id="getList" resultMap="logMap" parameterType="com.su.elf.common.entity.SearchParam">
         select
         <include refid="base_Column_List" />
         from log where 1=1
@@ -40,7 +40,7 @@
         limit #{limit} offset #{offset}
     </select>
 
-    <select id="getCount" resultType="int" parameterType="com.su.common.entity.SearchParam" >
+    <select id="getCount" resultType="int" parameterType="com.su.elf.common.entity.SearchParam" >
         SELECT count(*) FROM log where 1=1
         <if test="name!=null and name!='' " >
             AND module = #{name}
@@ -53,14 +53,14 @@
         </if>
     </select>
 
-    <insert id="insert" parameterType="com.su.system.entity.Log" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.su.elf.system.entity.Log" useGeneratedKeys="true" keyProperty="id">
         insert into
         log(id, level, module, client_ip, os, browser, content, create_time)
         values
         (#{id}, #{level}, #{module}, #{clientIp}, #{os}, #{browser}, #{content}, now())
     </insert>
 
-    <update id="update" parameterType="com.su.system.entity.Log">
+    <update id="update" parameterType="com.su.elf.system.entity.Log">
         update
         log
         set

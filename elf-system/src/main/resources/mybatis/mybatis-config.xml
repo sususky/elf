@@ -10,7 +10,7 @@
         <!--<package name="com.jlc.bean" />-->
     <!--</typeAliases>-->
     <plugins>
-        <plugin interceptor="com.su.system.interceptor.mybatis.SqlFetchInterceptor"></plugin>
+        <plugin interceptor="com.su.elf.system.interceptor.mybatis.SqlFetchInterceptor"></plugin>
     </plugins>
     <!--<mappers>-->
         <!--<mapper resource="xxx/xx/demo.xml" />-->
