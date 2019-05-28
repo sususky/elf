@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: elf-sso
+    name: elf-auth
   # 配置中心
   cloud:
     config:

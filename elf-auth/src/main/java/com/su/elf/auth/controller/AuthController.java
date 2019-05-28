@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletRequest;
  * @desc
  */
 @RestController
-public class MainController {
+public class AuthController {
 
-    private final static Logger logger = LoggerFactory.getLogger(MainController.class);
+    private final static Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     TokenStore tokenStore;

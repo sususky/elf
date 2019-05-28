@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author keets
  * @date 2017/10/17
  */
-public class SsoLogoutHandler implements LogoutHandler {
+public class AuthLogoutHandler implements LogoutHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(SsoLogoutHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthLogoutHandler.class);
 
 
     @Autowired

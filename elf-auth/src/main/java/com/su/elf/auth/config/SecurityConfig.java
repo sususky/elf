@@ -3,7 +3,7 @@ package com.su.elf.auth.config;
 
 import com.su.elf.common.service.RestService;
 import com.su.elf.common.service.impl.RestServiceImpl;
-import com.su.elf.auth.handler.SsoLogoutHandler;
+import com.su.elf.auth.handler.AuthLogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -89,8 +89,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public SsoLogoutHandler ssoLogoutHandler() {
-        return new SsoLogoutHandler();
+    public AuthLogoutHandler ssoLogoutHandler() {
+        return new AuthLogoutHandler();
     }
 
 }

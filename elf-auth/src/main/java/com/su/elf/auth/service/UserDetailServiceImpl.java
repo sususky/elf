@@ -6,7 +6,7 @@ import com.su.elf.common.CodeEnum;
 import com.su.elf.common.exception.CommonException;
 import com.su.elf.common.service.RestService;
 import com.su.elf.auth.entity.Authorities;
-import com.su.elf.auth.entity.SsoUser;
+import com.su.elf.auth.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,7 +29,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        SsoUser sso = new SsoUser();
+        User sso = new User();
         sso.setUsername(name);
         JSONObject jsonUser = restService.get("http://system/user?name=" + name);
         if(jsonUser!=null){

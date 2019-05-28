@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
-public class SsoExceptionHandler {
+public class AuthExceptionHandler {
 
-    private final static Logger logger = LoggerFactory.getLogger(SsoExceptionHandler.class);
+    private final static Logger logger = LoggerFactory.getLogger(AuthExceptionHandler.class);
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody

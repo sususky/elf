@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2019-01-02 16:13
  * @desc
  */
-public class SsoUser implements UserDetails {
+public class User implements UserDetails {
 
     private String username;
     private String password;
