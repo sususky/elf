@@ -18,13 +18,13 @@
     </parent>
 
     <modules>
-        <module>elf-common</module>
-        <module>elf-sso</module>
         <module>elf-eureka</module>
+        <module>elf-config</module>
+        <module>elf-common</module>
+        <module>elf-auth</module>
         <module>elf-system</module>
         <module>elf-admin</module>
         <module>elf-web</module>
-        <module>elf-config</module>
     </modules>
 
     <properties>

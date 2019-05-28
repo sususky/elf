@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>elf-sso</artifactId>
+    <artifactId>elf-auth</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
