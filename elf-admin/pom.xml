@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-redis</artifactId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <dependency>
@@ -66,12 +66,12 @@
         </dependency>
 
         <dependency>
-            <groupId>com.su</groupId>
+            <groupId>com.su.elf</groupId>
             <artifactId>elf-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.su</groupId>
-            <artifactId>elf-sso</artifactId>
+            <groupId>com.su.elf</groupId>
+            <artifactId>elf-auth-client</artifactId>
         </dependency>
 
     </dependencies>

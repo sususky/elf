@@ -10,10 +10,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.su.elf</groupId>
     <artifactId>elf-common</artifactId>
     <packaging>jar</packaging>
-
-    <name>elf-common</name>
 
     <dependencies>
         <dependency>
