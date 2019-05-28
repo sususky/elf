@@ -6,8 +6,8 @@ import com.su.elf.admin.entity.ClientUserAgent;
 import com.su.elf.admin.service.log.LogService;
 import com.su.elf.admin.service.rest.RestService;
 import com.su.elf.admin.service.user.UserService;
+import com.su.elf.auth.client.entity.User;
 import com.su.elf.common.entity.SearchParam;
-import com.su.sso.entity.SsoUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +35,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     //@Cacheable(value="getUser")
-    public SsoUser getByName(String account) {
+    public User getByName(String account) {
         SearchParam params = new SearchParam();
         params.setName(account);
         JSONObject json = getList(params);
         if(json!=null){
             JSONArray array = json.getJSONArray("list");
             if(array!=null && array.size()>0){
-                SsoUser user= new SsoUser();
+                User user= new User();
                 json = array.getJSONObject(0);
 //                user.setId(json.getInteger("id"));
 //                user.setAccount(json.getString("account"));

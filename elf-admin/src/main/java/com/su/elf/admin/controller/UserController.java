@@ -6,7 +6,7 @@ import com.su.elf.admin.service.user.UserService;
 import com.su.elf.common.entity.ResponseMessage;
 import com.su.elf.common.entity.SearchParam;
 import com.su.elf.common.exception.CommonException;
-import com.su.sso.entity.SsoUser;
+import com.su.elf.auth.client.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class UserController {
         if(StringUtils.isAnyEmpty(oldPsw, newPsw)){
             throw new IllegalArgumentException("参数为空");
         }
-        SsoUser user = userService.getByName(account);
+        User user = userService.getByName(account);
         JSONObject result;
         if(user!=null){
             if(oldPsw.equalsIgnoreCase(user.getPassword())){

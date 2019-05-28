@@ -1,4 +1,4 @@
-package com.su.elf.auth.server.entity;
+package com.su.elf.auth.client.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 

@@ -2,8 +2,8 @@ package com.su.elf.auth.server.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.su.elf.auth.entity.Authorities;
-import com.su.elf.auth.entity.User;
+import com.su.elf.auth.client.entity.Authorities;
+import com.su.elf.auth.client.entity.User;
 import com.su.elf.common.CodeEnum;
 import com.su.elf.common.exception.CommonException;
 import com.su.elf.common.service.RestService;

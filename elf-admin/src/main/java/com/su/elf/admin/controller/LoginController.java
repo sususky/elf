@@ -8,7 +8,7 @@ import com.su.elf.common.entity.ResponseMessage;
 import com.su.elf.common.redis.RedisDao;
 import com.su.elf.common.utils.CaptchaUtil;
 import com.su.elf.common.utils.RegexUtil;
-import com.su.sso.entity.SsoUser;
+import com.su.elf.auth.client.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +79,7 @@ public class LoginController {
             return ResponseMessage.error(CodeEnum.ILLEGAL_PARAM.getCode(), "用户名格式不合法");
         }
 
-        SsoUser user = userService.getByName(account);
+        User user = userService.getByName(account);
 
         if(user!=null){
             if(!StringUtils.isAnyEmpty(password, user.getPassword())

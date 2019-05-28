@@ -1,7 +1,7 @@
 package com.su.elf.auth.server.config;
 
 
-import com.su.elf.auth.handler.AuthLogoutHandler;
+import com.su.elf.auth.server.handler.AuthLogoutHandler;
 import com.su.elf.common.service.RestService;
 import com.su.elf.common.service.impl.RestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,12 +83,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/oauth/*", "/").permitAll()
                 .anyRequest().authenticated()
-                .and().logout().addLogoutHandler(ssoLogoutHandler())
+                .and().logout().addLogoutHandler(authLogoutHandler())
                 .and().csrf().disable();
     }
 
     @Bean
-    public AuthLogoutHandler ssoLogoutHandler() {
+    public AuthLogoutHandler authLogoutHandler() {
         return new AuthLogoutHandler();
     }
 
