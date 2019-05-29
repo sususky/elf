@@ -7,7 +7,7 @@
 * elf-eureka: 注册中心
 * elf-page-admin: 后台静态页面
 * elf-page-web: 前台静态页面
-* elf-sso: sso jar包
+* elf-auth: 权限认证，采用oauth2，分auth-server、auth-client 
 * elf-system: 系统管理服务
 * ekf-web: 前台应用接口
 

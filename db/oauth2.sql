@@ -15,3 +15,6 @@ CREATE TABLE oauth_client_details
   `autoapprove` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='终端信息表';
+
+INSERT INTO `oauth_client_details` VALUES
+('client_1', null, '123456', 'select', 'client_credentials,refresh_token', null, null, null, null, null, 'true');
