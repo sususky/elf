@@ -9,7 +9,7 @@ spring:
       maximum-pool-size: 5
 #      pool-name: dbcp1
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://172.18.36.120:3306/zb?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://172.18.36.120:3306/cms?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: root
     type: com.zaxxer.hikari.HikariDataSource
@@ -17,7 +17,7 @@ spring:
 
 logging:
   level:
-    com.su: DEBUG
+    com.su.elf: DEBUG
 #    org.springframework.security: INFO
 #  file: /var/log/java/sso.log
 
