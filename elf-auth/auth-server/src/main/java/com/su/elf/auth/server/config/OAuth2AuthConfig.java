@@ -35,16 +35,17 @@ public class OAuth2AuthConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        // mysql方案
         clients.jdbc(dataSource);
 //        password 方案一：明文存储，用于测试，不能用于生产
 //        String finalSecret = "123456";
 //        password 方案二：用 BCrypt 对密码编码
-        String finalSecret = new BCryptPasswordEncoder().encode("123456");
-        System.out.println(finalSecret);
+//        String finalSecret = new BCryptPasswordEncoder().encode("123456");
+//        System.out.println(finalSecret);
         // password 方案三：支持多种编码，通过密码的前缀区分编码方式
 /*
         String finalSecret = "{bcrypt}" + new BCryptPasswordEncoder().encode("123456");
-        //配置两个客户端,一个用于password认证一个用于client认证
+        // 内存方案, 配置两个客户端,一个用于password认证一个用于client认证
         clients.inMemory().withClient("client_1")
                 //.resourceIds(DEMO_RESOURCE_ID)
                 .authorizedGrantTypes("client_credentials", "refresh_token")
