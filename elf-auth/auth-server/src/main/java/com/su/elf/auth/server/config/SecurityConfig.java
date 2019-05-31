@@ -2,21 +2,20 @@ package com.su.elf.auth.server.config;
 
 
 import com.su.elf.auth.server.handler.AuthLogoutHandler;
-import com.su.elf.common.service.RestService;
-import com.su.elf.common.service.impl.RestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @author sury
@@ -28,15 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     RedisConnectionFactory redisConnectionFactory;
-    @Autowired
-    RestTemplate restTemplate;
 
-    @Bean
-    public RestService restService() {
-        RestServiceImpl restService = new RestServiceImpl();
-        restService.setRestTemplate(restTemplate);
-        return restService;
-    }
+    @Autowired
+    private UserDetailsService userDetailsService;
+
 
     @Bean
     public TokenStore tokenStore() {
@@ -90,6 +84,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthLogoutHandler authLogoutHandler() {
         return new AuthLogoutHandler();
+    }
+
+    @Autowired
+    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 
 }

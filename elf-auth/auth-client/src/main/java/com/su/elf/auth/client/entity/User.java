@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class User implements UserDetails {
 
+    private int id;
     private String username;
     private String password;
     private List<Authorities> authorities;  //权限
@@ -20,6 +21,14 @@ public class User implements UserDetails {
     private String roleName;
     private int isSuper;
     private int readOnly;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setUsername(String username) {
         this.username = username;

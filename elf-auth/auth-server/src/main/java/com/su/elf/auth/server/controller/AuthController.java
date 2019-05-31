@@ -51,4 +51,5 @@ public class AuthController {
         return ResponseMessage.ok();
     }
 
+
 }

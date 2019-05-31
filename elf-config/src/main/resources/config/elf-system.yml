@@ -1,31 +1,22 @@
 app:
   version: 1.0
-
-server:
-  port: 8071
-#  servlet:
-#    context-path: /system
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8070/eureka/
 #
 spring:
-  application:
-    name: system
 ## mysql 配置
-  datasource:
-    url: jdbc:mysql://172.18.36.120:3306/cms?characterEncoding=UTF-8
-#    url: jdbc:mysql://localhost:3306/cms?characterEncoding=UTF-8
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: root
-## Redis 配置
   redis:
     host: 172.18.36.120
-#    host: localhost
-    port: 6379
+    database: 0
+  datasource:
+    hikari:
+      connection-test-query: SELECT 1
+      minimum-idle: 1
+      maximum-pool-size: 5
+    #      pool-name: dbcp1
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.18.36.120:3306/cms?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
