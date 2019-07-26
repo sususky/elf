@@ -9,7 +9,7 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-          defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
 #logging:
 #  file: /var/log/java/eureka.log

@@ -8,7 +8,7 @@ spring:
         native:
           search-locations: classpath:config/ # 搜索src/main/resource 下的properties文件夹下的文件
   application:
-    name: elf-config
+    name: config
   profiles:
     active: native
 

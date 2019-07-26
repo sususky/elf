@@ -1,14 +1,15 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
-    name: elf-auth
+    name: auth
   # 配置中心
   cloud:
     config:
       uri: http://localhost:8071/
       fail-fast: true
+      profile: dev
 
 # 注册中心配置
 eureka:

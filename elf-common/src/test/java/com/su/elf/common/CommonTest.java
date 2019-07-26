@@ -3,6 +3,10 @@ package com.su.elf.common;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * Hello world!
@@ -10,22 +14,23 @@ import org.junit.Test;
  */
 public class CommonTest {
 
-    @Test
-    public void test() {
-        System.out.println(toShortAddr("吉林省吉林市舒兰市电鑫源小区17号楼"));
+    public static void main(String [] args){
+
     }
 
-    public String toShortAddr(String districtAddr) {
-        String newAddr = districtAddr;
-        if (districtAddr != null && !districtAddr.isEmpty()) {
-            int index0 = districtAddr.indexOf("省");
-            int index1 = districtAddr.indexOf("市");
-            if(index0 + index1 >= 0){
-                // 有省字
-                newAddr = districtAddr.substring(index1 + 1);
+    public static int[] twoSum(int[] nums, int target){
+        for(int i=0;i<nums.length;i++){
+            for(int j=i+1;i<nums.length;j++){
+                if(nums[i] + nums[j] == target){
+                    return new int[] {i, j};
+                }
             }
         }
-        return newAddr;
+        throw new IllegalArgumentException("no two sum solution");
     }
+
+
+
+
 
 }

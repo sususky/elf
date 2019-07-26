@@ -1,14 +1,15 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   application:
-    name: elf-system
+    name: system
   # 配置中心
   cloud:
     config:
       uri: http://localhost:8071/
       fail-fast: true
+      profile: dev
 
 # 注册中心配置
 eureka:
