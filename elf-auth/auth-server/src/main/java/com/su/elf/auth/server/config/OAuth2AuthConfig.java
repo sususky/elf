@@ -73,7 +73,7 @@ public class OAuth2AuthConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
         //允许表单认证
-        oauthServer.allowFormAuthenticationForClients();
+        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients();
     }
 
 }
