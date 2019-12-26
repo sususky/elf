@@ -1,6 +1,7 @@
 package com.su.elf.admin.config;
 
-import com.su.elf.admin.interceptor.LoginlerInterceptor;
+import com.su.elf.admin.interceptor.AccessInterceptor;
+import com.su.elf.admin.interceptor.LoginInterceptor;
 import com.su.elf.common.redis.RedisDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -30,7 +31,9 @@ public class WebConfig implements WebMvcConfigurer {
     private StringRedisTemplate redisTemplate;
 
     @Autowired
-    private LoginlerInterceptor loginlerInterceptor;
+    private LoginInterceptor loginInterceptor;
+    @Autowired
+    private AccessInterceptor accessInterceptor;
 
     @Bean
     public RedisDao getRedisDao(){
@@ -41,7 +44,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginlerInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(accessInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/**");
     }
 
 }

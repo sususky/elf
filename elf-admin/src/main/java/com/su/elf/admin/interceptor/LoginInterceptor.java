@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  * @version
  */
 @Component
-public class LoginlerInterceptor extends HandlerInterceptorAdapter {
+public class LoginInterceptor extends HandlerInterceptorAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginlerInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
     @Value("${auth.excludes}")
     String excludes;
@@ -42,7 +42,7 @@ public class LoginlerInterceptor extends HandlerInterceptorAdapter {
 
         String uri = request.getServletPath();
 
-        if(uri.equals("/")){
+        if("/".equals(uri)){
             return true;
         }
 
