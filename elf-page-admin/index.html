@@ -15,70 +15,60 @@
 </head>
 
 <body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <!-- 头部 -->
-    <div class="layui-header" p-com="header">
-        <div class="layui-logo">
-            <a href="index.html">
-                <img src="images/logo.svg" width="30"><span>苏苏</span>
-            </a>
-        </div>
-        <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item" lay-unselect>
-                <a ew-event="flexible" title="侧边伸缩"><i class="layui-icon layui-icon-shrink-right"></i></a>
-            </li>
-        </ul>
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item" lay-unselect>
-                <a id="btnMessage" title="消息"><i class="layui-icon layui-icon-notice"></i></a>
-            </li>
-            <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                <a ew-event="fullScreen" title="全屏"><i class="layui-icon layui-icon-screen-full"></i></a>
-            </li>
-            <li class="layui-nav-item" lay-unselect>
-                <a>
-                    <img src="images/avatar/profile_av.jpg" class="layui-nav-img">
-                    <cite>管理员</cite>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd lay-unselect>
-                        <a id="setInfo">个人信息</a>
-                    </dd>
-                    <dd lay-unselect>
-                        <a id="setPsw">修改密码</a>
-                    </dd>
-                    <hr>
-                    <dd lay-unselect>
-                        <a id="btnLogout">退出</a>
-                    </dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item" lay-unselect>
-                <a ew-event="theme" title="主题"><i class="layui-icon layui-icon-set-fill"></i></a>
-            </li>
-        </ul>
-    </div>
-
+<div id="main-index" class="layui-layout layui-layout-admin">
     <!-- 侧边栏 -->
     <div class="layui-side" p-com="side">
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree" style="margin-top: 15px;" id="menu-view">
-
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon layui-icon-senior"></i>&emsp;<cite>系统监控</cite></a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="/swagger-ui.html" target="_blank">API文档</a></dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd><a href="/druid" target="_blank">Druid监控</a></dd>
-                    </dl>
-                </li>
             </ul>
         </div>
     </div>
 
     <!-- 主体部分 -->
     <div class="layui-body">
+        <!-- 头部 -->
+        <div class="layui-header" p-com="header">
+            <div class="layui-logo">
+                <a href="index.html">
+                    <img src="images/logo.svg" width="30"><span>苏苏</span>
+                </a>
+            </div>
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item" lay-unselect>
+                    <a ew-event="flexible" title="侧边伸缩"><i class="layui-icon layui-icon-shrink-right"></i></a>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item" lay-unselect>
+                    <a id="btnMessage" title="消息"><i class="layui-icon layui-icon-notice"></i></a>
+                </li>
+                <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                    <a ew-event="fullScreen" title="全屏"><i class="layui-icon layui-icon-screen-full"></i></a>
+                </li>
+                <li class="layui-nav-item" lay-unselect>
+                    <a>
+                        <img src="images/avatar/profile_av.jpg" class="layui-nav-img">
+                        <cite>管理员</cite>
+                    </a>
+                    <dl class="layui-nav-child user-info">
+                        <dd lay-unselect>
+                            <a id="setInfo">个人信息</a>
+                        </dd>
+                        <dd lay-unselect>
+                            <a id="setPsw">修改密码</a>
+                        </dd>
+                        <hr>
+                        <dd lay-unselect>
+                            <a id="btnLogout">退出</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" lay-unselect>
+                    <a ew-event="theme" title="主题"><i class="layui-icon layui-icon-set-fill"></i></a>
+                </li>
+            </ul>
+
+        </div>
         <div class="layui-tab" lay-allowClose="true" lay-filter="index-pagetabs">
             <ul class="layui-tab-title">
             </ul>
@@ -100,7 +90,7 @@
     </div>
 
     <!-- 底部 -->
-    <div class="layui-footer">Copyright © 2018 sususky All rights reserved. <span class="pull-right">Version 1.0</span>
+    <div class="layui-footer">Copyright © 2019 sususky All rights reserved. <span class="pull-right">Version 1.0</span>
     </div>
 
     <!-- 手机屏幕遮罩层 -->

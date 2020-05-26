@@ -45,8 +45,8 @@ layui.use(['form', 'table', 'util', 'laydate', 'config', 'index', 'base'], funct
                     return util.toDateString(d.createTime);
                 }, title: '创建时间'
             },
-            // {field: 'state', sort: true, templet: '#user-tpl-state', title: '状态'},
-            {align: 'center', toolbar: '#user-table-bar', title: '操作'}
+            {field: 'readonly',width: 80, sort: false, templet: '#user-tpl-state', title: '只读'},
+            {align: 'center', width: 180, toolbar: '#user-table-bar', title: '操作'}
         ]]
     });
 

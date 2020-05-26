@@ -1,4 +1,4 @@
-layui.use(['form', 'table', 'util', 'laydate', 'config', 'base'], function () {
+layui.use(['form', 'table', 'util', 'laydate', 'config', 'base', 'tableX'], function () {
     var form = layui.form;
     var table = layui.table;
     var config = layui.config;
@@ -6,6 +6,7 @@ layui.use(['form', 'table', 'util', 'laydate', 'config', 'base'], function () {
     var util = layui.util;
     var base = layui.base;
     var laydate = layui.laydate;
+    var tableX = layui.tableX;
 
     //时间范围
     laydate.render({
@@ -130,12 +131,17 @@ layui.use(['form', 'table', 'util', 'laydate', 'config', 'base'], function () {
         layer.open({
             type: 1,
             title: '权限管理',
-            area: ['450px', '380px'],
-            offset: '120px',
-            content: '<ul id="treeAuth" class="ztree" style="padding: 25px 0px 20px 60px;"></ul>',
-            btn: ['保存', '关闭'],
-            btnAlign: 'c',
+            // area: ['450px', '380px'],
+            // offset: '120px',
+            area: '750px',
+            offset: '65px',
+            // content: '<ul id="treeAuth" class="ztree" style="padding: 25px 0px 20px 60px;"></ul>',
+            // btn: ['保存', '关闭'],
+            // btnAlign: 'c',
+            content: $('#authModel').html(),
             success: function (layero, index) {
+
+                /*
                 $(layero).children('.layui-layer-content').css('overflow-y', 'auto');
                 layer.load(2);
                 var setting = {
@@ -148,6 +154,54 @@ layui.use(['form', 'table', 'util', 'laydate', 'config', 'base'], function () {
                     $.fn.zTree.init($('#treeAuth'), setting, data.data);
                     layer.closeAll('loading');
                 });
+
+                */
+
+                // 渲染表格
+                table.render({
+                    elem: '#roleAuthTable',
+                    url: config.base_server + 'privilege',
+                    where: {
+                        token: base.getToken(),
+                        roleId: roleId
+                    },
+                    page: false,
+                    height: 400,
+                    cols: [[
+                        {type: 'numbers'},
+                        {field: 'parentName', sort: true, title: '模块', width: 115},
+                        {field: 'authorityName', sort: true, title: '接口名称', unresize: true, width: 165},
+                        {field: 'authority', sort: true, title: '权限标识', unresize: true},
+                        {templet: '#authState', title: '读写', unresize: true, width: 90},
+                        {templet: '#checkboxTpl', title: '授权', unresize: true, width: 90}
+                    ]],
+                    done: function (res, curr, count) {
+                        tableX.merges('roleAuthTable', [1], ['parentName']);
+                    }
+                });
+
+                // 监听授权开关
+                /*
+                form.on('switch(authState)', function (obj) {
+                    layer.load(2);
+                    base.getReq('privilege/role', {
+                        roleId: roleId,
+                        authId: obj.value
+                    }, function (res) {
+                        layer.closeAll('loading');
+                        if (res.code == 200) {
+                            layer.msg(res.msg, {icon: 1});
+                        } else {
+                            layer.msg(res.msg, {icon: 2});
+                            $(obj.elem).prop('checked', !obj.elem.checked);
+                            form.render('checkbox');
+                        }
+                    }, obj.elem.checked ? 'POST' : 'DELETE');
+                });
+                 */
+                // 去掉margin
+                // $('#roleAuthTable').css('margin', '0');
+                // $('#roleAuthTable+.layui-table-view').css('margin', '0');
             },
             yes: function (index) {
                 layer.load(1);
