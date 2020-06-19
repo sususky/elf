@@ -2,7 +2,7 @@ package com.su.elf.common.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.su.elf.common.Constants;
-import com.su.elf.common.exception.CommonException;
+import com.su.elf.common.exception.ApiException;
 import com.su.elf.common.service.RestService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpEntity;
@@ -71,12 +71,12 @@ public class RestServiceImpl implements RestService {
             if(json!=null && json.getInteger("code")== Constants.SUCCESS){
                 return json.getJSONObject("data");
             }else if(json!=null && json.getInteger("code")!=Constants.SUCCESS){
-                throw new CommonException(json.getInteger("code"), json.getString("msg"));
+                throw new ApiException(json.getInteger("code"), json.getString("msg"));
             }else{
-                throw new CommonException(Constants.SERVER_ERROR, "调用服务出错");
+                throw new ApiException(Constants.SERVER_ERROR, "调用服务出错");
             }
         }else{
-            throw new CommonException(Constants.SERVER_ERROR, "调用服务出错");
+            throw new ApiException(Constants.SERVER_ERROR, "调用服务出错");
         }
     }
 

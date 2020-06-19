@@ -1,7 +1,7 @@
 package com.su.elf.admin.interceptor;
 
 import com.su.elf.common.CodeEnum;
-import com.su.elf.common.exception.CommonException;
+import com.su.elf.common.exception.ApiException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +67,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         logger.warn("uri: [{}]校验失败", uri);
-        throw new CommonException(CodeEnum.NO_PERMISSION);
+        throw new ApiException(CodeEnum.NO_PERMISSION);
 
         //return true;
     }

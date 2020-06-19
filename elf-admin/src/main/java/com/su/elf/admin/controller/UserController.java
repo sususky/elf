@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.su.elf.admin.service.user.UserService;
 import com.su.elf.common.entity.ResponseMessage;
 import com.su.elf.common.entity.SearchParam;
-import com.su.elf.common.exception.CommonException;
+import com.su.elf.common.exception.ApiException;
 import com.su.elf.auth.client.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -53,10 +53,10 @@ public class UserController {
                 jsonObject.put("password", newPsw);
                 result = userService.updatePojo(jsonObject);
             }else{
-                throw new CommonException("旧密码错误");
+                throw new ApiException("旧密码错误");
             }
         }else{
-            throw new CommonException("用户不存在");
+            throw new ApiException("用户不存在");
         }
         logger.info("用户[{}]，修改密码，旧密码[{}]、新密码[{}]", account, oldPsw, newPsw);
 

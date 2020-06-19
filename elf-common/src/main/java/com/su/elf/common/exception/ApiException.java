@@ -2,7 +2,7 @@ package com.su.elf.common.exception;
 
 import com.su.elf.common.CodeEnum;
 
-public class CommonException extends RuntimeException {
+public class ApiException extends RuntimeException {
 
     /**
      * 错误编码
@@ -15,11 +15,11 @@ public class CommonException extends RuntimeException {
      * @param message  信息描述
      * @param cause  根异常类（可以存入任何异常）
      */
-    public CommonException(String message, Throwable cause){
+    public ApiException(String message, Throwable cause){
         super(message, cause);
     }
 
-    public CommonException(String message){
+    public ApiException(String message){
         super(message);
     }
 
@@ -29,7 +29,7 @@ public class CommonException extends RuntimeException {
      * @param errorCode 错误编码
      * @param message 信息描述
     */
-    public CommonException(int errorCode, String message) {
+    public ApiException(int errorCode, String message) {
         super(message);
         setErrorCode(errorCode);
     }
@@ -39,7 +39,7 @@ public class CommonException extends RuntimeException {
      *
      * @param codeEnum
      */
-    public CommonException(CodeEnum codeEnum) {
+    public ApiException(CodeEnum codeEnum) {
         super(codeEnum.getMsg());
         setErrorCode(codeEnum.getCode());
     }

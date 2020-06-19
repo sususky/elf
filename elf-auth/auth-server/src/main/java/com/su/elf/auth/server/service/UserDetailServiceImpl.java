@@ -4,7 +4,7 @@ import com.su.elf.auth.client.entity.User;
 import com.su.elf.auth.server.mapper.AuthoritieMapper;
 import com.su.elf.auth.server.mapper.UserMapper;
 import com.su.elf.common.CodeEnum;
-import com.su.elf.common.exception.CommonException;
+import com.su.elf.common.exception.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,7 +32,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if (user != null) {
             user.setAuthorities(authoritieMapper.getPrivilegeByRoleId(user.getRoleId()));
         } else {
-            throw new CommonException(CodeEnum.NO_USER);
+            throw new ApiException(CodeEnum.NO_USER);
         }
 
 //        String finalSecret = "{bcrypt}" + new BCryptPasswordEncoder().encode("123456");
