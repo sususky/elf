@@ -1,4 +1,4 @@
-package com.su.logging.entity;
+package com.su.elf.logging.entity;
 
 import lombok.Getter;
 import lombok.Setter;

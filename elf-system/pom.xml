@@ -56,6 +56,10 @@
             <groupId>com.su.elf</groupId>
             <artifactId>elf-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.su.elf</groupId>
+            <artifactId>elf-logging</artifactId>
+        </dependency>
 
 
     </dependencies>

@@ -1,7 +1,7 @@
-package com.su.logging.service;
+package com.su.elf.logging.service;
 
 import com.su.elf.common.entity.SearchParam;
-import com.su.logging.entity.Log;
+import com.su.elf.logging.entity.Log;
 import org.springframework.scheduling.annotation.Async;
 
 import javax.servlet.http.HttpServletResponse;

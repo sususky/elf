@@ -1,10 +1,10 @@
-package com.su.logging.aop;
+package com.su.elf.logging.aop;
 
 import com.su.elf.common.utils.SecurityUtils;
-import com.su.logging.entity.ClientUserAgent;
-import com.su.logging.entity.Log;
-import com.su.logging.service.LogService;
-import com.su.logging.annotation.LogRecord;
+import com.su.elf.logging.entity.ClientUserAgent;
+import com.su.elf.logging.entity.Log;
+import com.su.elf.logging.service.LogService;
+import com.su.elf.logging.annotation.LogRecord;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -40,7 +40,7 @@ public class LogAspect {
     /**
      * 配置切入点
      */
-    @Pointcut("@annotation(com.su.logging.annotation.LogRecord)")
+    @Pointcut("@annotation(com.su.elf.logging.annotation.LogRecord)")
     public void logPointcut() {
         // 该方法无方法体,主要为了让同类中其他方法使用此切入点
     }

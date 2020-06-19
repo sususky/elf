@@ -7,28 +7,30 @@
     <groupId>com.su</groupId>
     <artifactId>elf</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>${elf.version}</version>
 
     <modules>
         <module>elf-eureka</module>
         <module>elf-config</module>
+        <module>elf-gateway</module>
+
         <module>elf-common</module>
         <module>elf-auth</module>
         <module>elf-system</module>
-        <module>elf-admin</module>
         <module>elf-web</module>
         <module>elf-logging</module>
     </modules>
 
     <properties>
+        <elf.version>1.0-SNAPSHOT</elf.version>
         <junit.version>4.12</junit.version>
         <mockito.version>2.27.0</mockito.version>
         <lombok.version>1.18.10</lombok.version>
         <slf4j.version>1.7.26</slf4j.version>
         <fastjson.version>1.2.70</fastjson.version>
         <mybatis.spring.boot.starter.version>2.1.2</mybatis.spring.boot.starter.version>
-        <spring.boot.version>2.2.5.RELEASE</spring.boot.version>
-        <spring.cloud.version>Hoxton.SR4</spring.cloud.version>
+        <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
+        <spring.cloud.version>Hoxton.SR5</spring.cloud.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -195,12 +197,17 @@
             <dependency>
                 <groupId>com.su.elf</groupId>
                 <artifactId>elf-common</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${elf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.su.elf</groupId>
                 <artifactId>elf-auth-client</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${elf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.su.elf</groupId>
+                <artifactId>elf-logging</artifactId>
+                <version>${elf.version}</version>
             </dependency>
 
         </dependencies>

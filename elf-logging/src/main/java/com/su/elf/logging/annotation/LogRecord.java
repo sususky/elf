@@ -1,4 +1,4 @@
-package com.su.logging.annotation;
+package com.su.elf.logging.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -11,5 +11,8 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
-#logging:
+logging:
+  level:
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
 #  file: /var/log/java/eureka.log

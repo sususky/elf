@@ -1,9 +1,9 @@
-package com.su.logging.service.impl;
+package com.su.elf.logging.service.impl;
 
 import com.su.elf.common.entity.SearchParam;
-import com.su.logging.entity.Log;
-import com.su.logging.mapper.LogMapper;
-import com.su.logging.service.LogService;
+import com.su.elf.logging.entity.Log;
+import com.su.elf.logging.mapper.LogMapper;
+import com.su.elf.logging.service.LogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

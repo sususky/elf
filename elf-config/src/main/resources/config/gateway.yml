@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: path_route
+        uri: http://localhost:8082/log
+        predicates:
+        - Path=/log

@@ -1,4 +1,4 @@
-package com.su.logging.entity;
+package com.su.elf.logging.entity;
 
 import eu.bitwalker.useragentutils.UserAgent;
 

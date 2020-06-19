@@ -1,6 +1,6 @@
-package com.su.logging.mapper;
+package com.su.elf.logging.mapper;
 
-import com.su.logging.entity.Log;
+import com.su.elf.logging.entity.Log;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
