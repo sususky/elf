@@ -1,7 +1,7 @@
-package com.su.elf.auth.server.service;
+package com.su.elf.auth.service;
 
-import com.su.elf.auth.client.entity.AuthUser;
-import com.su.elf.auth.server.mapper.UserMapper;
+import com.su.elf.auth.entity.AuthUser;
+import com.su.elf.auth.mapper.UserMapper;
 import com.su.elf.common.CodeEnum;
 import com.su.elf.common.exception.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;

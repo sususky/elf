@@ -1,4 +1,4 @@
-package com.su.elf.auth.server;
+package com.su.elf.auth;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -15,10 +15,10 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.su.elf" })   // 包含日志模块
 @MapperScan("com.su.elf.**.mapper")
-public class AuthServerApplication {
+public class AuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthServerApplication.class, args);
+        SpringApplication.run(AuthApplication.class, args);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.su.elf.auth.client.entity;
+package com.su.elf.auth.entity;
 
 import lombok.Getter;
 import lombok.Setter;

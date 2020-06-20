@@ -1,11 +1,11 @@
-package com.su.elf.auth.server.controller;
+package com.su.elf.auth.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.su.elf.auth.client.entity.AuthUser;
+import com.su.elf.auth.entity.AuthUser;
 import com.su.elf.auth.client.jwt.JwtProperties;
-import com.su.elf.auth.client.jwt.JwtTokenUtil;
-import com.su.elf.auth.server.service.OnlineUserService;
-import com.su.elf.auth.server.service.UserService;
+import com.su.elf.auth.service.OnlineUserService;
+import com.su.elf.auth.service.UserService;
+import com.su.elf.auth.util.JwtTokenUtil;
 import com.su.elf.common.CodeEnum;
 import com.su.elf.common.annotation.AnonymousAccess;
 import com.su.elf.common.entity.ResponseMessage;

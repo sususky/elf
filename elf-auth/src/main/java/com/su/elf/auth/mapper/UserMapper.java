@@ -1,6 +1,6 @@
-package com.su.elf.auth.server.mapper;
+package com.su.elf.auth.mapper;
 
-import com.su.elf.auth.client.entity.AuthUser;
+import com.su.elf.auth.entity.AuthUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;

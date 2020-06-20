@@ -1,8 +1,8 @@
-package com.su.elf.auth.server.service;
+package com.su.elf.auth.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.su.elf.auth.client.entity.AuthUser;
+import com.su.elf.auth.entity.AuthUser;
 import com.su.elf.auth.client.jwt.JwtProperties;
 import com.su.elf.auth.server.entity.OnlineUser;
 import com.su.elf.common.redis.RedisDao;

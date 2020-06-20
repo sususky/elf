@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.su.elf" })   // 包含鉴权
+//@ComponentScan(basePackages = { "com.su.elf" })   // 包含鉴权
 public class GatewayApplication {
 
     public static void main(String[] args) {

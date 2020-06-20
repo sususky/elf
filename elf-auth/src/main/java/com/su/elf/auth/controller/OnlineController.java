@@ -1,6 +1,6 @@
-package com.su.elf.auth.server.controller;
+package com.su.elf.auth.controller;
 
-import com.su.elf.auth.server.service.OnlineUserService;
+import com.su.elf.auth.service.OnlineUserService;
 import com.su.elf.logging.annotation.LogRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

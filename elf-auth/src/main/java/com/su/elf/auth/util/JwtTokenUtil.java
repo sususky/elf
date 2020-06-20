@@ -1,15 +1,11 @@
-package com.su.elf.auth.client.jwt;
+package com.su.elf.auth.util;
 
-import com.su.elf.auth.client.entity.AuthUser;
-import com.su.elf.common.redis.RedisDao;
+
+import com.su.elf.auth.entity.AuthUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.UUID;
 
@@ -19,26 +15,11 @@ import java.util.UUID;
  * @date 2020/6/20 13:46
  */
 @Slf4j
-@Component
-public class JwtTokenUtil implements InitializingBean {
+public class JwtTokenUtil {
 
     private static final String AUTHORITIES_KEY = "auth";
-
-    private final JwtProperties properties;
-    private final RedisDao redisDao;
     private Key key;
 
-    public JwtTokenUtil(JwtProperties properties, RedisDao redisDao) {
-        this.properties = properties;
-        this.redisDao = redisDao;
-    }
-
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        byte[] keyBytes = Decoders.BASE64.decode(properties.getBase64Secret());
-        this.key = Keys.hmacShaKeyFor(keyBytes);
-    }
 
     public String verifyToken(String token, String request){
         Claims claims = Jwts.parserBuilder()

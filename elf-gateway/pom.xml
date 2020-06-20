@@ -57,16 +57,25 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- jwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.su.elf</groupId>
             <artifactId>elf-common</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.su.elf</groupId>
-            <artifactId>elf-auth-client</artifactId>
-        </dependency>
 
     </dependencies>
 
