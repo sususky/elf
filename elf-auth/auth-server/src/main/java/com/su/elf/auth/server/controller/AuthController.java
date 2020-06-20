@@ -3,7 +3,7 @@ package com.su.elf.auth.server.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.su.elf.auth.client.entity.AuthUser;
 import com.su.elf.auth.client.jwt.JwtProperties;
-import com.su.elf.auth.client.jwt.JwtTokenProvider;
+import com.su.elf.auth.client.jwt.JwtTokenUtil;
 import com.su.elf.auth.server.service.OnlineUserService;
 import com.su.elf.auth.server.service.UserService;
 import com.su.elf.common.CodeEnum;
@@ -18,7 +18,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,7 +50,7 @@ public class AuthController {
     @Autowired
     private RedisDao redisDao;
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private UserService userService;
     @Autowired
@@ -135,7 +134,7 @@ public class AuthController {
         if(user!=null){
             if(StringUtils.isNotEmpty(user.getPassword()) && user.getPassword().equals(password)){
                 // 生成令牌
-                String token = jwtTokenProvider.createToken(user);
+                String token = jwtTokenUtil.createToken(user);
                 // 保存在线信息
                 onlineUserService.save(user, token, request);
                 // 返回 token 与 用户信息
@@ -156,7 +155,7 @@ public class AuthController {
     @ApiOperation("退出登录")
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ResponseMessage logout(HttpServletRequest request){
-        onlineUserService.logout(jwtTokenProvider.getToken(request));
+        onlineUserService.logout(jwtTokenUtil.getToken(request));
         return ResponseMessage.ok();
     }
 

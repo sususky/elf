@@ -1,6 +1,7 @@
 spring:
   redis:
-    host: 192.168.1.4
+#    host: 192.168.1.4
+    host: localhost
     database: 0
   datasource:
     hikari:
@@ -9,9 +10,9 @@ spring:
       maximum-pool-size: 5
 #      pool-name: dbcp1
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.4:3306/cms?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/cms?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
-    password:
+    password: root
     type: com.zaxxer.hikari.HikariDataSource
 
 #jwt

@@ -1,22 +1,18 @@
 package com.su.elf.auth.client.jwt;
 
 import com.su.elf.auth.client.entity.AuthUser;
-import com.su.elf.common.redis.RedisDao;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Administrator
@@ -25,15 +21,16 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor
-public class JwtTokenProvider implements InitializingBean {
+public class JwtTokenUtil implements InitializingBean {
 
     private static final String AUTHORITIES_KEY = "auth";
-    private static final String AUTH_TOKEN_HEADER_NAME = "token";
 
     private final JwtProperties properties;
-    private final RedisDao redisDao;
     private Key key;
+
+    public JwtTokenUtil(JwtProperties properties) {
+        this.properties = properties;
+    }
 
 
     @Override
@@ -42,7 +39,7 @@ public class JwtTokenProvider implements InitializingBean {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String verifyToken(String token, String url){
+    public String verifyToken(String token){
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
@@ -67,25 +64,8 @@ public class JwtTokenProvider implements InitializingBean {
                 .compact();
     }
 
-    /**
-     * @param token 需要检查的token
-     */
-    public void checkRenewal(String token){
-        // 判断是否续期token,计算token的过期时间
-        long time = redisDao.getExpire(properties.getOnlineKey() + token);
-        // 如果在续期检查的范围内，则续期
-        if(time <= properties.getDetect()){
-            redisDao.expire(properties.getOnlineKey() + token, properties.getRenew(), TimeUnit.MILLISECONDS);
-        }
+
+    public String getToken(HttpServletRequest request) {
+        return request.getHeader("token");
     }
-
-    public String getToken(HttpServletRequest request){
-        String token = request.getHeader(AUTH_TOKEN_HEADER_NAME);
-        if(StringUtils.isBlank(token)){
-            token = request.getParameter(AUTH_TOKEN_HEADER_NAME);
-        }
-
-        return token;
-    }
-
 }
