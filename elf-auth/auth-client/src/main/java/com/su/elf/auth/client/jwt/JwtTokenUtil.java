@@ -1,6 +1,7 @@
 package com.su.elf.auth.client.jwt;
 
 import com.su.elf.auth.client.entity.AuthUser;
+import com.su.elf.common.redis.RedisDao;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -9,8 +10,6 @@ import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.UUID;
 
@@ -26,10 +25,12 @@ public class JwtTokenUtil implements InitializingBean {
     private static final String AUTHORITIES_KEY = "auth";
 
     private final JwtProperties properties;
+    private final RedisDao redisDao;
     private Key key;
 
-    public JwtTokenUtil(JwtProperties properties) {
+    public JwtTokenUtil(JwtProperties properties, RedisDao redisDao) {
         this.properties = properties;
+        this.redisDao = redisDao;
     }
 
 
@@ -39,7 +40,7 @@ public class JwtTokenUtil implements InitializingBean {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String verifyToken(String token){
+    public String verifyToken(String token, String request){
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
@@ -65,7 +66,4 @@ public class JwtTokenUtil implements InitializingBean {
     }
 
 
-    public String getToken(HttpServletRequest request) {
-        return request.getHeader("token");
-    }
 }

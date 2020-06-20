@@ -155,7 +155,7 @@ public class AuthController {
     @ApiOperation("退出登录")
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ResponseMessage logout(HttpServletRequest request){
-        onlineUserService.logout(jwtTokenUtil.getToken(request));
+        onlineUserService.logout(request.getHeader("token"));
         return ResponseMessage.ok();
     }
 
