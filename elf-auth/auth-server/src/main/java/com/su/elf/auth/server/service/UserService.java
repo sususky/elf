@@ -5,7 +5,6 @@ import com.su.elf.auth.server.mapper.UserMapper;
 import com.su.elf.common.CodeEnum;
 import com.su.elf.common.exception.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -21,7 +20,7 @@ public class UserService {
     private UserMapper userMapper;
 
 
-    public AuthUser loadUserByUsername(String name) throws UsernameNotFoundException {
+    public AuthUser loadUserByUsername(String name) {
         AuthUser user = userMapper.getByName(name);
         if (user != null) {
             user.setRoles(userMapper.getRoles(user.getId()));

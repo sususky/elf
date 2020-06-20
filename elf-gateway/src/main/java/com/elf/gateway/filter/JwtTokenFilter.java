@@ -1,14 +1,14 @@
 package com.elf.gateway.filter;
 
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.su.elf.auth.client.jwt.JwtTokenProvider;
-import com.su.elf.common.CodeEnum;
+
+import com.su.elf.common.utils.collection.CollectionUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
@@ -26,63 +26,31 @@ import java.util.List;
  * @Desc
  * @date 2020/6/20 8:36
  */
+@Slf4j
 @Component
-public class JwtTokenFilter implements GatewayFilter, Ordered {
+public class JwtTokenFilter implements GlobalFilter, Ordered {
 
     /**
      * 不进行token校验的请求地址
      */
-    @Value("#{'${jwt.}'.split(',')}")
+    @Value("#{'${jwt.whiteUrlList}'.split(',')}")
     private List<String> whiteUrlList;
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+//    @Autowired
+//    private JwtTokenProvider jwtTokenProvider;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String requestUrl = exchange.getRequest().getPath().toString();
         boolean status = CollectionUtil.contains(whiteUrlList, requestUrl);
-        if (!status){
-            String token = exchange.getRequest().getHeaders().getFirst("token");
-            //type用于区分不同的端，在做校验token时需要
-//            String type= exchange.getRequest().getHeaders().getFirst("type");
-            ServerHttpResponse response = exchange.getResponse();
-            //没有数据
-            if (StrUtil.isBlank(token)) {
-                JSONObject message = new JSONObject();
-                message.put("code", CodeEnum.UN_AUTH);
-                message.put("message", "鉴权失败，无token");
-                byte[] bits = message.toString().getBytes(StandardCharsets.UTF_8);
-                DataBuffer buffer = response.bufferFactory().wrap(bits);
-                response.setStatusCode(HttpStatus.UNAUTHORIZED);
-                response.getHeaders().add("Content-Type", "text/json;charset=UTF-8");
-                return response.writeWith(Mono.just(buffer));
-            }else {
-                //校验token
-                String userKey = jwtTokenProvider.verifyToken(token, requestUrl);
-                if (StrUtil.isEmpty(userKey)){
-                    JSONObject message = new JSONObject();
-                    message.put("message", "token错误");
-                    message.put("code", CodeEnum.ILLEGAL_PARAM);
-                    byte[] bits = message.toString().getBytes(StandardCharsets.UTF_8);
-                    DataBuffer buffer = response.bufferFactory().wrap(bits);
-                    response.setStatusCode(HttpStatus.UNAUTHORIZED);
-                    response.getHeaders().add("Content-Type", "text/json;charset=UTF-8");
-                    return response.writeWith(Mono.just(buffer));
-                }
-                //将现在的request，添加当前身份
-                ServerHttpRequest mutableReq = exchange.getRequest().mutate().header("Authorization-UserKey", userKey).build();
-                ServerWebExchange mutableExchange = exchange.mutate().request(mutableReq).build();
-                return chain.filter(mutableExchange);
-            }
-        }
+        log.info("custom global filter");
         return chain.filter(exchange);
 
     }
 
     @Override
     public int getOrder() {
-        return 0;
+        return 1;
     }
 
 }

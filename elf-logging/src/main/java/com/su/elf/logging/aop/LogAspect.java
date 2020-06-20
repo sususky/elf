@@ -1,6 +1,5 @@
 package com.su.elf.logging.aop;
 
-import com.su.elf.common.utils.SecurityUtils;
 import com.su.elf.logging.entity.ClientUserAgent;
 import com.su.elf.logging.entity.Log;
 import com.su.elf.logging.service.LogService;
@@ -103,7 +102,7 @@ public class LogAspect {
 
     private String getUsername() {
         try {
-            return SecurityUtils.getCurrentUsername();
+            return "user";
         }catch (Exception e){
             return "";
         }

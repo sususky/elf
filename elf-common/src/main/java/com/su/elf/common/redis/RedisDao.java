@@ -1,6 +1,7 @@
 package com.su.elf.common.redis;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.BoundHashOperations;
@@ -26,11 +27,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisDao {
 
+    @Autowired
     private StringRedisTemplate redisTemplate;
-
-    public void setRedisTemplate(StringRedisTemplate redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     /**
      *
