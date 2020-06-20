@@ -1,30 +1,37 @@
 package com.su.elf.auth.server.mapper;
 
-import com.su.elf.auth.client.entity.User;
-import com.su.elf.common.mapper.BaseMapper;
+import com.su.elf.auth.client.entity.AuthUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper {
 
 	/**
 	 *
 	 * @Param:
 	 * @return:
 	 */
-	@Select("SELECT id, role_id, account, password, nickname, readonly, is_super FROM user where account = #{account}")
+	@Select("SELECT id, username, password, nickname, is_super, avater, gender FROM sys_user where username = #{username}")
 	// 返回 Map 结果集
 	@Results({
 			@Result(property = "id", column = "id"),
-			@Result(property = "roleId", column = "role_id"),
 			@Result(property = "isSuper", column = "is_super"),
-			@Result(property = "username", column = "account"),
 	})
-	User getByName(@Param("account") String account);
+	AuthUser getByName(@Param("username") String username);
+
+	/**
+	 *
+	 * @Param:
+	 * @return:
+	 */
+	@Select("SELECT role_id FROM sys_user_role_rel where user_id = #{id}")
+	List<Integer> getRoles(@Param("id") int id);
 
 }

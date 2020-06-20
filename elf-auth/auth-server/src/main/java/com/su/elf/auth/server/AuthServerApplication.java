@@ -12,7 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-@MapperScan("com.su.*.mapper")
+@MapperScan("com.su.elf.auth.server.mapper")
 public class AuthServerApplication {
 
     public static void main(String[] args) {

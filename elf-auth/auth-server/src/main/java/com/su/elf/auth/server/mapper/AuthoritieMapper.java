@@ -1,7 +1,5 @@
 package com.su.elf.auth.server.mapper;
 
-import com.su.elf.auth.client.entity.Authorities;
-import com.su.elf.common.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
@@ -11,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface AuthoritieMapper extends BaseMapper<Authorities> {
+public interface AuthoritieMapper {
 
     /**
      *
@@ -25,6 +23,6 @@ public interface AuthoritieMapper extends BaseMapper<Authorities> {
             @Result(property = "authority", column = "link"),
             @Result(property = "authorityName", column = "privilege_name"),
     })
-    List<Authorities> getPrivilegeByRoleId(@Param("roleId")int roleId);
+    List<Integer> getPrivilegeByRoleId(@Param("roleId")int roleId);
 
 }

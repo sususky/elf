@@ -27,7 +27,9 @@
         <mockito.version>2.27.0</mockito.version>
         <lombok.version>1.18.10</lombok.version>
         <slf4j.version>1.7.26</slf4j.version>
+        <jjwt.version>0.11.1</jjwt.version>
         <fastjson.version>1.2.70</fastjson.version>
+        <swagger.version>2.9.2</swagger.version>
         <mybatis.spring.boot.starter.version>2.1.2</mybatis.spring.boot.starter.version>
         <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
         <spring.cloud.version>Hoxton.SR5</spring.cloud.version>
@@ -108,11 +110,11 @@
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.security.oauth</groupId>
-                <artifactId>spring-security-oauth2</artifactId>
-                <version>2.3.5.RELEASE</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.security.oauth</groupId>-->
+<!--                <artifactId>spring-security-oauth2</artifactId>-->
+<!--                <version>2.3.5.RELEASE</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -159,15 +161,32 @@
                 <version>8.0.19</version>
             </dependency>
 
+            <!-- jwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>2.8.5</version>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>5.3.8</version>
             </dependency>
             <dependency>
                 <groupId>com.google.zxing</groupId>
@@ -185,6 +204,25 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <!-- Swagger UI 相关 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <!-- Java图形验证码 -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>1.6.2</version>
             </dependency>
 
             <dependency>

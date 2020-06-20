@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.su.elf</groupId>
-    <artifactId>gateway</artifactId>
+    <artifactId>elf-gateway</artifactId>
     <version>${elf.version}</version>
     <name>gateway</name>
     <description>Demo project for Spring Boot</description>
@@ -37,6 +37,26 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.su.elf</groupId>
+            <artifactId>elf-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.su.elf</groupId>
+            <artifactId>elf-auth-client</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

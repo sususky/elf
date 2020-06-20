@@ -20,9 +20,18 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- jwt -->
         <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
         </dependency>
 
         <dependency>
@@ -82,10 +91,7 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.7.1</version>
                 </plugin>
-                <plugin>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>
