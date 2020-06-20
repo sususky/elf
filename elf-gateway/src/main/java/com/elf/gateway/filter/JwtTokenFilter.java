@@ -59,7 +59,7 @@ public class JwtTokenFilter implements GatewayFilter, Ordered {
                 return response.writeWith(Mono.just(buffer));
             }else {
                 //校验token
-                String userKey = jwtTokenProvider.verufyToken(token);
+                String userKey = jwtTokenProvider.verifyToken(token, requestUrl);
                 if (StrUtil.isEmpty(userKey)){
                     JSONObject message = new JSONObject();
                     message.put("message", "token错误");
@@ -70,8 +70,6 @@ public class JwtTokenFilter implements GatewayFilter, Ordered {
                     response.getHeaders().add("Content-Type", "text/json;charset=UTF-8");
                     return response.writeWith(Mono.just(buffer));
                 }
-                // todo 校验权限
-
                 //将现在的request，添加当前身份
                 ServerHttpRequest mutableReq = exchange.getRequest().mutate().header("Authorization-UserKey", userKey).build();
                 ServerWebExchange mutableExchange = exchange.mutate().request(mutableReq).build();

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.su" })   // 包含日志模块
+@ComponentScan(basePackages = { "com.su.elf" })   // 包含日志模块
 @MapperScan("com.su.elf.*.mapper")
 public class SystemApplication {
 

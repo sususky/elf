@@ -42,7 +42,7 @@ public class JwtTokenProvider implements InitializingBean {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String verufyToken(String token){
+    public String verifyToken(String token, String url){
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()

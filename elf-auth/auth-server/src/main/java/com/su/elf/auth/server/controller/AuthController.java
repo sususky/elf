@@ -45,8 +45,6 @@ public class AuthController {
 
     private static final String CAPTCHA_KEY_PREFIX = "captcha:";
 
-    @Value("${loginCode.expiration}")
-    private int expiration;
 
     @Autowired
     private JwtProperties jwtProperties;
@@ -81,7 +79,7 @@ public class AuthController {
         String result = captcha.text();
         String uuid = CAPTCHA_KEY_PREFIX + UUID.randomUUID().toString().replace("-", "");
         // 保存
-        redisDao.set(uuid, result, expiration, TimeUnit.MINUTES);
+        redisDao.set(uuid, result, jwtProperties.getCodeExpiration(), TimeUnit.MINUTES);
         // 验证码信息
         Map<String,Object> imgResult = new HashMap<String,Object>(2){{
             put("img", captcha.toBase64());

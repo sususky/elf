@@ -31,6 +31,7 @@ public class JwtProperties {
     /** 验证码 key */
     private String codeKey;
     private Integer captchaOpen;
+    private Integer codeExpiration;
 
     /** token 续期检查 */
     private Long detect;
