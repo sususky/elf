@@ -87,7 +87,7 @@ public class OnlineUserService {
         return JSONObject.parseObject(json, OnlineUser.class);
     }
 
-    public Map<String, Object> getAll(String filter, Pageable pageable) {
+    public JSONObject getAll(String filter, Pageable pageable) {
         List<OnlineUser> onlineUsers = getAll(filter);
         return PageUtil.toPage(
                 PageUtil.toPage(pageable.getPageNumber(), pageable.getPageSize(), onlineUsers),

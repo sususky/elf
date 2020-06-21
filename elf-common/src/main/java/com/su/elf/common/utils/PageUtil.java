@@ -1,11 +1,10 @@
 package com.su.elf.common.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author surongyao
@@ -32,21 +31,21 @@ public class PageUtil {
     /**
      * Page 数据处理，预防redis反序列化报错
      */
-    public static Map<String,Object> toPage(Page page) {
-        Map<String,Object> map = new LinkedHashMap<>(2);
-        map.put("content",page.getContent());
-        map.put("totalElements",page.getTotalElements());
-        return map;
+    public static JSONObject toPage(Page page) {
+        JSONObject json = new JSONObject();
+        json.put("list", page.getContent());
+        json.put("total", page.getTotalElements());
+        return json;
     }
 
     /**
      * 自定义分页
      */
-    public static Map<String,Object> toPage(Object object, Object totalElements) {
-        Map<String,Object> map = new LinkedHashMap<>(2);
-        map.put("content",object);
-        map.put("totalElements",totalElements);
-        return map;
+    public static JSONObject toPage(Object object, Object totalElements) {
+        JSONObject json = new JSONObject();
+        json.put("list", object);
+        json.put("total", totalElements);
+        return json;
     }
 
 }

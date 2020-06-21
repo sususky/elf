@@ -1,6 +1,7 @@
 package com.su.elf.auth.controller;
 
 import com.su.elf.auth.service.OnlineUserService;
+import com.su.elf.common.entity.ResponseMessage;
 import com.su.elf.logging.annotation.LogRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,8 +34,8 @@ public class OnlineController {
 
     @ApiOperation("查询在线用户")
     @GetMapping
-    public ResponseEntity<Object> query(String filter, Pageable pageable){
-        return new ResponseEntity<>(onlineUserService.getAll(filter, pageable), HttpStatus.OK);
+    public ResponseMessage query(String filter, Pageable pageable){
+        return ResponseMessage.ok(onlineUserService.getAll(filter, pageable));
     }
 
     @LogRecord("导出数据")
