@@ -18,11 +18,11 @@ public interface UserMapper {
 	 * @Param:
 	 * @return:
 	 */
-	@Select("SELECT id, username, password, nickname, is_super, avater, gender FROM sys_user where username = #{username}")
+	@Select("SELECT id, username, password, nickname, avatar_url, gender FROM sys_user where username = #{username}")
 	// 返回 Map 结果集
 	@Results({
 			@Result(property = "id", column = "id"),
-			@Result(property = "isSuper", column = "is_super"),
+			@Result(property = "avatar", column = "avatar_url"),
 	})
 	AuthUser getByName(@Param("username") String username);
 

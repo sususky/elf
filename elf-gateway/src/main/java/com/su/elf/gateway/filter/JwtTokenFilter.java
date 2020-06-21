@@ -43,7 +43,7 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        log.info("jinlaile");
+        log.info("鉴权过滤器");
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
         String requestUrl = request.getPath().toString();

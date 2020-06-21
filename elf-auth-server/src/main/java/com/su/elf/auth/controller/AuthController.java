@@ -56,13 +56,8 @@ public class AuthController {
     @Autowired
     private OnlineUserService onlineUserService;
 
-    @RequestMapping("/welcome")
-    public ResponseMessage welcome() {
-        return ResponseMessage.ok().put("version", 1.0);
-    }
 
     @ApiOperation("获取验证码")
-    @AnonymousAccess
     @RequestMapping("/captcha")
     public void captcha(HttpServletResponse response) throws Exception{
         response.setHeader("Cache-Control", "no-store");
@@ -93,7 +88,6 @@ public class AuthController {
 
     @LogRecord("用户登录")
     @ApiOperation("登录授权")
-    @AnonymousAccess
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseMessage login(HttpServletRequest request, @RequestBody JSONObject args){
         if(args==null || args.isEmpty()){
@@ -108,6 +102,7 @@ public class AuthController {
             }else{
                 text = redisDao.get(CAPTCHA_KEY_PREFIX + uuid);
                 // 清除验证码
+                redisDao.del(CAPTCHA_KEY_PREFIX + uuid);
             }
 
             if(StringUtils.isEmpty(text) || !text.equalsIgnoreCase(captcha)){

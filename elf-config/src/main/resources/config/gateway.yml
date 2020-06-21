@@ -2,13 +2,13 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: path_route
-        uri: http://localhost:8082/log
+      - id: sys_route
+        uri: lb://system:8082
         predicates:
-        - Path=/log
+        - Path=/system/{segment}
       - id: auth_route
         uri: lb://auth:8081
         predicates:
-        - Path=/auth/{segment}
+        - Path=/auth/{segment},/online
 
 

@@ -40,6 +40,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.su.elf</groupId>
+            <artifactId>elf-common</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
