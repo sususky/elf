@@ -1,6 +1,6 @@
-package com.elf.gateway.config;
+package com.su.elf.gateway.config;
 
-import com.elf.gateway.filter.JwtTokenFilter;
+import com.su.elf.gateway.filter.JwtTokenFilter;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
