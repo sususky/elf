@@ -55,6 +55,10 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
                 return getVoidMono(response, CodeEnum.UN_AUTH);
             }else{
                 String userKey = jwtTokenUtil.verifyToken(token, requestUrl);
+                if (StringUtils.isBlank(userKey)){
+                    response.setStatusCode(HttpStatus.FORBIDDEN);
+                    return getVoidMono(response, CodeEnum.NO_PERMISSION);
+                }
                 ServerHttpRequest mutableReq = request.mutate().header("userKey", userKey).build();
                 ServerWebExchange mutableExchange = exchange.mutate().request(mutableReq).build();
                 return chain.filter(mutableExchange);

@@ -50,6 +50,7 @@ public class JwtTokenUtil implements InitializingBean {
 
             // fix bug: 当前用户如果没有任何权限时，在输入用户名后，刷新验证码会抛IllegalArgumentException
             Object authoritiesStr = claims.get(AUTHORITIES_KEY);
+            return claims.getSubject();
         }
 
         return null;
