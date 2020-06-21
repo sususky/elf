@@ -10,8 +10,6 @@
     </parent>
 
     <artifactId>elf-config</artifactId>
-    <name>elf-config</name>
-    <description>Demo project for Spring Boot</description>
 
     <dependencies>
         <dependency>

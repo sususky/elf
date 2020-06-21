@@ -1,4 +1,4 @@
-package com.su.elf.auth.client.jwt;
+package com.su.elf.auth.client.config;
 
 import lombok.Getter;
 import lombok.Setter;

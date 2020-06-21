@@ -2,12 +2,13 @@ package com.elf.gateway.filter;
 
 import com.alibaba.fastjson.JSON;
 
-import com.elf.gateway.jwt.JwtTokenUtil;
+import com.su.elf.auth.client.jwt.JwtTokenUtil;
 import com.su.elf.common.CodeEnum;
 import com.su.elf.common.entity.ResponseMessage;
 import com.su.elf.common.utils.collection.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -37,7 +38,7 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
      */
     @Value("#{'${jwt.whiteUrlList}'.split(',')}")
     private List<String> whiteUrlList;
-
+    @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
     @Override

@@ -7,7 +7,7 @@
     <groupId>com.su</groupId>
     <artifactId>elf</artifactId>
     <packaging>pom</packaging>
-    <version>${elf.version}</version>
+    <version>1.0-SNAPSHOT</version>
 
     <modules>
         <module>elf-eureka</module>
@@ -15,10 +15,12 @@
         <module>elf-gateway</module>
 
         <module>elf-common</module>
-        <module>elf-auth</module>
-        <module>elf-system</module>
-        <module>elf-web</module>
+        <module>elf-auth-client</module>
         <module>elf-logging</module>
+
+        <module>elf-auth-server</module>
+        <module>elf-system</module>
+
     </modules>
 
     <properties>

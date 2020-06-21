@@ -11,9 +11,9 @@
 
   <groupId>com.su.elf</groupId>
   <artifactId>elf-logging</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
+  <version>${elf.version}</version>
   <name>elf-logging</name>
+  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>

@@ -1,11 +1,15 @@
-package com.su.elf.auth.util;
+package com.su.elf.auth.client.jwt;
 
 
-import com.su.elf.auth.entity.AuthUser;
+import com.su.elf.auth.client.config.JwtProperties;
+import com.su.elf.auth.client.entity.AuthUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.security.Key;
 import java.util.UUID;
 
@@ -15,11 +19,14 @@ import java.util.UUID;
  * @date 2020/6/20 13:46
  */
 @Slf4j
+@Component
 public class JwtTokenUtil {
 
     private static final String AUTHORITIES_KEY = "auth";
     private Key key;
 
+    @Autowired
+    private JwtProperties jwtProperties;
 
     public String verifyToken(String token, String request){
         Claims claims = Jwts.parserBuilder()

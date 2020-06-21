@@ -6,14 +6,14 @@
     <parent>
         <groupId>com.su</groupId>
         <artifactId>elf</artifactId>
-        <version>${elf.version}</version>
+        <version>1.0-SNAPSHOT</version>
         <!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
     </parent>
 
     <groupId>com.su.elf</groupId>
     <artifactId>elf-gateway</artifactId>
     <version>${elf.version}</version>
-    <name>gateway</name>
+    <name>elf-gateway</name>
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
@@ -57,23 +57,13 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- jwt -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.su.elf</groupId>
             <artifactId>elf-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.su.elf</groupId>
+            <artifactId>elf-auth-client</artifactId>
         </dependency>
 
 
