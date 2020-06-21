@@ -6,6 +6,9 @@ spring:
         uri: http://localhost:8082/log
         predicates:
         - Path=/log
-
+      - id: auth_route
+        uri: lb://auth:8081
+        predicates:
+        - Path=/auth/{segment}
 
 

@@ -34,7 +34,7 @@ jwt:
   detect: 1800
   # 续期时间范围，默认1小时，单位秒
   renew: 7200
-  whiteUrlList: welcome,captcha,login
+  whiteUrlList: welcome,/auth/captcha,login
 
 logging:
   level:
