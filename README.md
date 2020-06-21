@@ -15,7 +15,7 @@
 * elf-logging: 日志jar包，aop方式通过注解保存核心操作日志到数据库
 * elf-auth-server: 授权服务，采用jwt，springboot服务，8081端口
 * elf-system: 系统管理服务，8082端口
-* elf-admin: 后台应用接口
+
 * elf-page-admin: 后台静态页面
 * elf-page-web: 前台静态页面
 
