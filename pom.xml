@@ -9,38 +9,34 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.4.RELEASE</version>
-        <!--<relativePath/> -->
-        <!-- lookup parent from repository -->
-    </parent>
-
     <modules>
         <module>elf-eureka</module>
         <module>elf-config</module>
+        <module>elf-gateway</module>
+
         <module>elf-common</module>
-        <module>elf-auth</module>
+        <module>elf-auth-client</module>
+        <module>elf-logging</module>
+
+        <module>elf-auth-server</module>
         <module>elf-system</module>
-        <module>elf-admin</module>
-        <module>elf-web</module>
+
     </modules>
 
     <properties>
+        <elf.version>1.0-SNAPSHOT</elf.version>
         <junit.version>4.12</junit.version>
         <mockito.version>2.27.0</mockito.version>
-        <lombok.version>1.18.6</lombok.version>
+        <lombok.version>1.18.10</lombok.version>
         <slf4j.version>1.7.26</slf4j.version>
-        <fastjson.version>1.2.57</fastjson.version>
-        <mybatis.version>3.5.1</mybatis.version>
-        <mybatis-spring.version>2.0.1</mybatis-spring.version>
-        <spring-boot-starter-data-redis.version>2.1.4.RELEASE</spring-boot-starter-data-redis.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <jjwt.version>0.11.1</jjwt.version>
+        <fastjson.version>1.2.70</fastjson.version>
+        <swagger.version>2.9.2</swagger.version>
+        <mybatis.spring.boot.starter.version>2.1.2</mybatis.spring.boot.starter.version>
+        <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
+        <spring.cloud.version>Hoxton.SR5</spring.cloud.version>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -51,6 +47,7 @@
             <!-- 表示开发的时候引入，发布的时候不会加载此包 -->
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -64,17 +61,31 @@
             <version>${slf4j.version}</version>
         </dependency>
 
-
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- jdk1.8后，不包含这些包。需要额外导入 -->
+            <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
-                <version>2.3.0</version>
+                <version>2.3.1</version>
             </dependency>
-            <!-- jdk1.8后，不包含这些包。需要额外导入 -->
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-core</artifactId>
@@ -83,28 +94,28 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>2.3.0</version>
+                <version>2.3.2</version>
             </dependency>
-
             <dependency>
                 <groupId>javax.activation</groupId>
                 <artifactId>activation</artifactId>
                 <version>1.1.1</version>
             </dependency>
+
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis-spring.version}</version>
+                <version>${mybatis.spring.boot.starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
-                <version>${spring-boot-starter-data-redis.version}</version>
+                <version>${spring.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.security.oauth</groupId>
-                <artifactId>spring-security-oauth2</artifactId>
-                <version>2.3.5.RELEASE</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+                <version>${spring.boot.version}</version>
             </dependency>
 
             <dependency>
@@ -115,14 +126,20 @@
             </dependency>
 
             <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>3.5.4</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.7</version>
+                <version>3.9</version>
             </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.11</version>
+                <version>1.13</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -138,33 +155,37 @@
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
-                <version>1.9.1</version>
+                <version>1.9.4</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.46</version>
+                <version>8.0.19</version>
+            </dependency>
+
+            <!-- jwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis-spring.version}</version>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>2.8.5</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
@@ -174,13 +195,32 @@
             <dependency>
                 <groupId>com.jcraft</groupId>
                 <artifactId>jsch</artifactId>
-                <version>0.1.54</version>
+                <version>0.1.55</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <!-- Swagger UI 相关 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <!-- Java图形验证码 -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>1.6.2</version>
             </dependency>
 
             <dependency>
@@ -193,17 +233,36 @@
             <dependency>
                 <groupId>com.su.elf</groupId>
                 <artifactId>elf-common</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${elf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.su.elf</groupId>
                 <artifactId>elf-auth-client</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${elf.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.su.elf</groupId>
+                <artifactId>elf-logging</artifactId>
+                <version>${elf.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
 
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

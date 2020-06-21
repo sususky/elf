@@ -17,4 +17,6 @@ CREATE TABLE oauth_client_details
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='终端信息表';
 
 INSERT INTO `oauth_client_details` VALUES
-('client_1', null, '{bcrypt}$2a$10$bLm3XSl686Oqsd.KEKpRtu3AzFsz5d84bGVu1wQPw4JN/4PgW/Bo.', 'select', 'client_credentials,refresh_token', null, null, null, null, null, 'true');
+('client', null, '{bcrypt}$2a$10$bLm3XSl686Oqsd.KEKpRtu3AzFsz5d84bGVu1wQPw4JN/4PgW/Bo.', 'server', 'client_credentials,refresh_token', null, null, null, null, null, 'true'),
+('password', null, '{bcrypt}$2a$10$bLm3XSl686Oqsd.KEKpRtu3AzFsz5d84bGVu1wQPw4JN/4PgW/Bo.', 'server', 'password,refresh_token', null, null, null, null, null, 'true'),
+('code', null, '{bcrypt}$2a$10$bLm3XSl686Oqsd.KEKpRtu3AzFsz5d84bGVu1wQPw4JN/4PgW/Bo.', 'server', 'password,refresh_token,authorization_code,client_credentials', 'http://localhost:8090/login', null, null, null, null, 'true');

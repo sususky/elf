@@ -80,23 +80,18 @@ layui.define(['config'], function (exports) {
                     if(data.code==201){
                         base.removeToken();
                         layer.msg('登录过期', {icon: 2}, function () {
-                            location.href = 'login.html';
+                            // location.href = 'login.html';
                         });
-                    }else{
+                    }else if(data.code==0){
                         success(data);
+                    }else{
+                        layer.msg(data.msg, {icon: 2});
                     }
 
                 },
                 error: function (xhr) {
                     console.log(xhr.status + ' - ' + xhr.statusText);
-                    success({code: xhr.status, msg: xhr.statusText});
-                    /*
-                    if (xhr.status == 401) {
-                        base.removeToken();
-                        layer.msg('登录过期', {icon: 2}, function () {
-                            location.href = 'login.html';
-                        });
-                    }*/
+                    layer.msg('服务器开小差了', {icon: 2});
                 },
                 beforeSend: function (xhr) {
                     var token = base.getToken();
@@ -114,15 +109,23 @@ layui.define(['config'], function (exports) {
                 type: 'get',
                 dataType: 'JSON',
                 success: function (data) {
+                    console.log(data);
                     if(data.code==201){
                         base.removeToken();
                         layer.msg('登录过期', {icon: 2}, function () {
-                            location.href = 'login.html';
+                            // location.href = 'login.html';
                         });
-                    }else{
+                    }else if(data.code==0){
                         success(data);
+                    }else{
+                        layer.msg(data.msg, {icon: 2});
                     }
 
+                },
+                error: function (xhr) {
+                    console.log(xhr.status + ' - ' + xhr.statusText);
+                    layer.msg('服务器开小差了', {icon: 2});
+                    // location.href = '500.html';
                 }
             });
         }

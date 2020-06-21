@@ -41,7 +41,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
         List<Privilege> pList = getPrivilegeByParentId(0);
         if(!CollectionUtils.isEmpty(pList)){
             for(Privilege p:pList){
-                map.put(p.getId(), p.getPrivilegeName());
+                map.put(p.getId(), p.getName());
 //                List<Privilege> subList = getPrivilegeByParentId(p.getId());
 //                p.setSubprivileges(subList);
             }

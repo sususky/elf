@@ -33,14 +33,15 @@ layui.config({
 
         $.ajax({
             url: config.base_server + 'login',
-            data: field,
+            contentType: "application/json",
+            data: JSON.stringify(field),
             type: 'POST',
             dataType: 'JSON',
             success: function (data) {
                 console.log(JSON.stringify(data));
                 if (data.code==0) {
-                    base.putToken(data.data.token);
-                    base.putUser(data.data.user);
+                    base.putToken(data.token);
+                    base.putUser(data.user);
                     layer.msg('登录成功', {icon: 1}, function () {
                         location.replace('./');
                     });
@@ -50,7 +51,8 @@ layui.config({
                 }
             },
             error: function () {
-                layer.msg('登录失败，请按f12查看console错误信息', {icon: 5});
+                layer.closeAll('loading');
+                layer.msg('登录失败', {icon: 5});
             }
         });
 

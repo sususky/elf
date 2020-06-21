@@ -3,6 +3,44 @@ html {
     background-color: #f2f2f2;
     color: #666;
 }
+h5, .h5 {
+    font-size: 1.57em;
+    line-height: 1.4em;
+    margin-bottom: 15px;
+}
+
+.exception .container{
+    background-color: #929495;
+    height: 900px;
+}
+.container>.content-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 15px;
+    color: #FFFFFF;
+    width: 100%;
+    max-width: 880px;
+}
+
+.exception .card-plain {
+    margin: 0 auto;
+    border-radius: .25rem;
+    padding-bottom: .7rem;
+    max-width: 320px;
+}
+.card-plain .logo-container {
+    width: 65px;
+    margin: 0 auto 20px;
+}
+
+.unlogin{
+    display: none;
+}
 
 /* 覆盖layui css */
 .layui-btn {
@@ -27,6 +65,10 @@ html {
 .layui-btn-danger {
     background-color: #FF5722;
 }
+.layui-nav .layui-nav-more{
+    border-color: #f3f5f8 transparent transparent;
+}
+
 /** header样式 */
 /** 导航栏下面的线条 */
 .layui-layout-admin .layui-header .layui-nav-bar {
@@ -61,16 +103,19 @@ html {
     background-color: #8c99e0;
     height: 50px;
     box-shadow: 0 1px 4px 0 rgba(0, 21, 41, .08);
-    margin-left: 220px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 .layui-layout-admin .layui-header a {
-    color: #fff;
+    /*color: #fff;*/
     padding: 0 15px;
 }
-/*
 .layui-layout-admin .layui-header .layui-nav-item a:hover {
     background-color: #7987d4;
-}*/
+
+}
 
 
 /** logo部分样式 */
@@ -122,14 +167,14 @@ html {
 
 .layui-layout-admin .layui-side {
     top: -16px;
-    width: 220px;
+    width: 200px;
     background-color: #fff;
     transition: all .3s;
     -webkit-transition: all .3s;
 }
 
 .layui-layout-admin .layui-side .layui-nav {
-    width: 220px;
+    width: 200px;
     background-color: #fff;
 }
 
@@ -145,7 +190,11 @@ html {
 .layui-layout-admin .layui-side .layui-nav .layui-nav-more {
     right: 15px;
 }
-
+.layui-nav .layui-nav-mored, .layui-nav-itemed>a .layui-nav-more {
+    margin-top: -9px;
+    border-style: dashed dashed solid;
+    border-color: transparent transparent #f3f5f8;
+}
 .layui-layout-admin .layui-side .layui-nav .layui-nav-item .layui-nav-child a {
     padding-left: 50px;
     color: #546e7a;
@@ -163,14 +212,17 @@ html {
     color: #6572b8;
     font-weight: bold;
 }
-.layui-nav-tree .layui-nav-child dd.layui-this {
-    background-color: #fff;
-    border-right: 3px solid #8c99e0;
+.layui-nav-tree .layui-nav-bar{
+    width:5px;height:0;background-color:#8c99e0;
 }
 .layui-nav-tree .layui-nav-child dd.layui-this a {
     font-weight: bold;
 }
-
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a,
+.layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
+    background-color: #fff;
+    border-right: 3px solid #8c99e0;
+}
 /*
 .layui-nav-tree .layui-nav-child dd.layui-this a:before {
     font-family:'FontAwesome';
@@ -183,8 +235,8 @@ html {
 
 /** 主体部分样式 */
 .layui-layout-admin .layui-body {
-    left: 220px;
-    top: 35px;
+    /*left: 220px;*/
+    top: 0;
     padding: 15px;
     transition: all .3s;
     overflow-y: scroll;
@@ -209,19 +261,20 @@ html {
     overflow-y: scroll;
     padding: 15px;
     right: 0;
-    top: 70px;
+    top: 100px;
     left: 0;
 }
 
 .layui-layout-admin .layui-body .layui-tab .layui-tab-title {
     height: 90px;
-    padding: 10px 40px;
+    width:100%;
+    padding: 50px 40px 0;
     background-color: #8c99e0;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
     position: absolute;
     right: 0;
     /*z-index: 999;*/
-    /*margin-top: -15px;*/
+    top: 10px;
     overflow: hidden;
 }
 
@@ -233,7 +286,7 @@ html {
     overflow: hidden;
     /*border: 1px solid transparent;*/
     border-radius: 30px;
-    margin: 15px 5px 0 0;;
+    margin: 0 5px;
     color: #fff;
 }
 
@@ -287,12 +340,13 @@ html {
 
 .layui-layout-admin .layui-body .layui-icon-more-vertical {
     right: 15px;
-    top: 35px;
+    top: 65px;
     color: #fff;
 }
 .layui-layout-admin .layui-body .layui-icon-more-vertical:hover {
     background: rgba(255,255,255,0.3);;
 }
+
 .admin-tabs-select.layui-nav {
     position: absolute;
     left: 0;
@@ -353,7 +407,7 @@ body.layui-fluid {
 
 /** 底部样式 */
 .layui-layout-admin .layui-footer {
-    left: 220px;
+    left: 200px;
     background: #fff;
     transition: all .3s;
 }
@@ -361,9 +415,6 @@ body.layui-fluid {
 /** 底部样式结束 */
 
 /** 侧导航折叠样式PC */
-.layui-layout-admin.admin-nav-mini .layui-header {
-    margin-left: 60px;
-}
 .layui-layout-admin.admin-nav-mini .layui-header .layui-logo {
     width: 60px;
 }

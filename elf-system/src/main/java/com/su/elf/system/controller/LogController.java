@@ -3,11 +3,9 @@ package com.su.elf.system.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.su.elf.common.entity.ResponseMessage;
 import com.su.elf.common.entity.SearchParam;
-import com.su.elf.system.entity.Log;
-import com.su.elf.system.service.log.LogService;
+import com.su.elf.logging.entity.Log;
+import com.su.elf.logging.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +22,6 @@ import java.util.List;
 @RequestMapping("/log")
 public class LogController {
 
-   // private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     LogService logService;
@@ -40,36 +37,36 @@ public class LogController {
         return ResponseMessage.ok(json);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseMessage addLog(@RequestBody Log log){
-        int id = logService.insertPojo(log);
-        JSONObject json = new JSONObject();
-        json.put("id", id);
-        return ResponseMessage.ok(json);
-    }
-
-    @RequestMapping(value = "/{pid}", method = RequestMethod.DELETE)
-    public ResponseMessage deleteLog(@PathVariable int pid){
-        int result = logService.deletePojo(pid);
-        JSONObject json = new JSONObject();
-        json.put("result", result);
-        return ResponseMessage.ok(json);
-    }
-
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseMessage updateRole(@RequestBody Log log){
-        int result = logService.updatePojo(log);
-        JSONObject json = new JSONObject();
-        json.put("result", result);
-        return ResponseMessage.ok(json);
-    }
-
-    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
-    public ResponseMessage getUser(@PathVariable int pid){
-        Log log = logService.getPojo(pid);
-        JSONObject json = new JSONObject();
-        json.put("log", log);
-        return ResponseMessage.ok(json);
-    }
+//    @RequestMapping(method = RequestMethod.POST)
+//    public ResponseMessage addLog(@RequestBody Log log){
+//        int id = logService.insertPojo(log);
+//        JSONObject json = new JSONObject();
+//        json.put("id", id);
+//        return ResponseMessage.ok(json);
+//    }
+//
+//    @RequestMapping(value = "/{pid}", method = RequestMethod.DELETE)
+//    public ResponseMessage deleteLog(@PathVariable int pid){
+//        int result = logService.deletePojo(pid);
+//        JSONObject json = new JSONObject();
+//        json.put("result", result);
+//        return ResponseMessage.ok(json);
+//    }
+//
+//    @RequestMapping(method = RequestMethod.PUT)
+//    public ResponseMessage updateRole(@RequestBody Log log){
+//        int result = logService.updatePojo(log);
+//        JSONObject json = new JSONObject();
+//        json.put("result", result);
+//        return ResponseMessage.ok(json);
+//    }
+//
+//    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
+//    public ResponseMessage getUser(@PathVariable int pid){
+//        Log log = logService.getPojo(pid);
+//        JSONObject json = new JSONObject();
+//        json.put("log", log);
+//        return ResponseMessage.ok(json);
+//    }
 
 }

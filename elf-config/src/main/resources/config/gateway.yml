@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: sys_route
+        uri: lb://system:8082
+        predicates:
+        - Path=/system/{segment}
+      - id: auth_route
+        uri: lb://auth:8081
+        predicates:
+        - Path=/auth/{segment},/online
+
+

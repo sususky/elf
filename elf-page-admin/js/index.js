@@ -8,13 +8,16 @@
     var base = layui.base;
 
     // 检查是否登录
+    /*
     if (!base.getToken() || base.getToken() == '') {
         location.replace('login.html');
         return;
     }
+    */
+    // $('#main-index').removeClass("unlogin");
 
+    index.initHeader();
     index.checkPageTabs();
-    //index.initUserInfo();
     index.initLeftNav();
     element.render('nav');
     index.bindEvent();

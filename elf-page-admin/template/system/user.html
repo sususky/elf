@@ -90,8 +90,8 @@
 
 <!-- 表格状态列 -->
 <script type="text/html" id="user-tpl-state">
-    <input type="checkbox" lay-filter="user-tpl-state" value="{{d.userId}}" lay-skin="switch" lay-text="正常|锁定"
-           {{d.state==0?'checked':''}}/>
+    <input type="checkbox" lay-filter="user-tpl-state" value="{{d.userId}}" lay-skin="switch" lay-text="是|否"
+           {{d.readonly==1?'checked':''}}/>
 </script>
 
 <script type="text/javascript" src="plugins/jquery/jquery.md5.js"></script>

@@ -1,0 +1,44 @@
+spring:
+  redis:
+#    host: 192.168.1.4
+    host: 192.168.1.4
+    database: 0
+  datasource:
+    hikari:
+      connection-test-query: SELECT 1
+      minimum-idle: 1
+      maximum-pool-size: 5
+#      pool-name: dbcp1
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.4:3306/cms?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password:
+    type: com.zaxxer.hikari.HikariDataSource
+
+#jwt
+jwt:
+  header: Authorization
+  # 令牌前缀
+  token-start-with: Bearer
+  # 必须使用最少88位的Base64对该令牌进行编码
+  base64-secret: ZmQ0ZGI5NjQ0MDQwY2I4MjMxY2Y3ZmI3MjdhN2ZmMjNhODViOTg1ZGE0NTBjMGM4NDA5NzYxMjdjOWMwYWRmZTBlZjlhNGY3ZTg4Y2U3YTE1ODVkZDU5Y2Y3OGYwZWE1NzUzNWQ2YjFjZDc0NGMxZWU2MmQ3MjY1NzJmNTE0MzI=
+  # 令牌过期时间 此处单位/秒 ，默认2小时，可在此网站生成 https://www.convertworld.com/zh-hans/time/milliseconds.html
+  token-validity-in-seconds: 7200
+  # 在线用户key
+  online-key: online-token-
+  # 验证码
+  code-key: code-key-
+  captchaOpen: 0
+  codeExpiration: 2
+  # token 续期检查时间范围（默认30分钟，单位秒），在token即将过期的一段时间内用户操作了，则给用户的token续期
+  detect: 1800
+  # 续期时间范围，默认1小时，单位秒
+  renew: 7200
+  whiteUrlList: /version,/auth/captcha,/auth/login
+
+logging:
+  level:
+    com.su.elf: DEBUG
+#    org.springframework.security: INFO
+#  file: /var/log/java/sso.log
+

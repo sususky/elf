@@ -8,6 +8,19 @@ layui.define(['config', 'layer', 'element', 'base'], function (exports) {
 
     var index = {
         openPageTabs: true,  // 是否开启多标签
+
+        // 初始化头部
+        initHeader: function () {
+            // 获取当前用户信息
+            var loginUser = base.getUser();
+            if(loginUser){
+                base.getReq("user/" + loginUser.id, {}, function () {
+                    //$('.layui-header').load('template/base/header.html');
+                });
+            }
+
+        },
+
         // 检查多标签功能是否开启
         checkPageTabs: function () {
             if (index.openPageTabs) {
@@ -18,7 +31,7 @@ layui.define(['config', 'layer', 'element', 'base'], function (exports) {
                     title: '<i class="layui-icon layui-icon-home"></i>',
                     content: '<div id="home"></div>'
                 });
-                $('#home').load('template/home');
+                // $('#home').load('template/home.html');
             } else {
                 $('.layui-layout-admin').removeClass('open-tab');
             }
@@ -185,15 +198,6 @@ layui.define(['config', 'layer', 'element', 'base'], function (exports) {
             }
         },
 
-        // 从服务器获取登录用户的信息
-        initUserInfo: function () {
-            // 获取当前用户信息
-            base.getReq("user/" + base.getUser().id, {}, function (data) {
-
-            });
-
-
-        },
         // 页面元素绑定事件监听
         bindEvent: function () {
             // 退出登录

@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth
+  # 配置中心
+  cloud:
+    config:
+      uri: http://localhost:8071/
+      fail-fast: true
+      profile: pro
+
+# 注册中心配置
+eureka:
+  #  instance:
+  #    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8070/eureka/

@@ -1,0 +1,37 @@
+app:
+  version: 1.0
+#
+spring:
+## mysql 配置
+  redis:
+    host: 172.18.36.125
+    database: 0
+  datasource:
+    hikari:
+      connection-test-query: SELECT 1
+      minimum-idle: 1
+      maximum-pool-size: 5
+    #      pool-name: dbcp1
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.18.36.125:3306/cms?autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#  config-location: classpath:mybatis/mybatis-config.xml
+#  configuration:
+#    interceptors:
+#      - SqlFetchInterceptor
+
+
+#
+logging:
+  level:
+    com.su: debug
+#logging.level.org.springframework.transaction=debug
+    org.mybatis: debug
+  file: /var/log/java/system.log
+
+

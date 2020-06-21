@@ -52,5 +52,17 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     <a class="layui-btn layui-btn-xs" lay-event="auth">权限管理</a>
 </script>
+<!-- 接口权限 -->
+<script type="text/html" id="authModel">
+    <table class="layui-table" id="roleAuthTable" lay-filter="roleAuthTable"></table>
+</script>
+<!-- 表格状态列 -->
+<script type="text/html" id="authState">
+    <input type="checkbox" lay-filter="authState" value="{{d.authority}}" lay-skin="switch"
+           lay-text="读写|只读" {{d.checked==1?'checked':''}}/>
+</script>
+<script type="text/html" id="checkboxTpl">
+    <input type="checkbox" name="lock" value="{{d.id}}" title="是" lay-filter="lockDemo" {{{d.checked==1?'checked':''}}/>
+</script>
 
 <script type="text/javascript" src="js/system/role.js"></script>

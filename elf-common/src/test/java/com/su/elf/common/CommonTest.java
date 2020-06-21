@@ -1,7 +1,7 @@
 package com.su.elf.common;
 
 
-import org.junit.Test;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -10,22 +10,13 @@ import org.junit.Test;
  */
 public class CommonTest {
 
-    @Test
-    public void test() {
-        System.out.println(toShortAddr("吉林省吉林市舒兰市电鑫源小区17号楼"));
+    public static void main(String [] args){
+        System.out.println(StringUtils.isEmpty(" "));
+        System.out.println(StringUtils.isEmpty(null));
+        System.out.println(StringUtils.isBlank(" "));
+        System.out.println(StringUtils.isBlank(null));
     }
 
-    public String toShortAddr(String districtAddr) {
-        String newAddr = districtAddr;
-        if (districtAddr != null && !districtAddr.isEmpty()) {
-            int index0 = districtAddr.indexOf("省");
-            int index1 = districtAddr.indexOf("市");
-            if(index0 + index1 >= 0){
-                // 有省字
-                newAddr = districtAddr.substring(index1 + 1);
-            }
-        }
-        return newAddr;
-    }
+
 
 }
