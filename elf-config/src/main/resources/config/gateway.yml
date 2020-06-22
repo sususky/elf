@@ -1,6 +1,9 @@
 spring:
   cloud:
     gateway:
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 5s
       routes:
       - id: sys_route
         uri: lb://system:8082
