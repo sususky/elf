@@ -13,5 +13,7 @@ spring:
         uri: lb://auth:8081
         predicates:
         - Path=/auth/{segment},/online
+#        filters:
+#        - StripPrefix=1
 
 

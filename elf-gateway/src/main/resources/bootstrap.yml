@@ -1,9 +1,10 @@
 server:
   port: 8080
-  servlet:
-    context-path: /api
+
 
 spring:
+#  webflux:
+#    base-path: /api
   application:
     name: gateway
   # 配置中心
