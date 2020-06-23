@@ -12,7 +12,7 @@ spring:
     config:
       uri: http://localhost:8071/
       fail-fast: true
-      name: gateway,auth-pro
+      name: gateway,auth-dev
 #      profile: pro
 
 # 注册中心配置

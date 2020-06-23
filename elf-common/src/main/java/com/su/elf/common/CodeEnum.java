@@ -17,6 +17,7 @@ public enum CodeEnum {
     UN_AUTH(401, "未登录"),
     NO_USER(402, "用户不存在"),
     NO_PERMISSION(403, "没有权限"),
+    METHOD_NOT_SUPPORTED(405, "HTTP方法不支持"),
 
     SQL_ERROR(510, "数据库错误"),
     SQL_INDEX_CONFLICT(511, "主键冲突");

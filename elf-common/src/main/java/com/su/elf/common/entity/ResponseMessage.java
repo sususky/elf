@@ -76,7 +76,7 @@ public class ResponseMessage extends JSONObject {
     public static ResponseMessage msg(int code, String message, JSON data) {
         ResponseMessage json = new ResponseMessage();
         json.put("code", code);
-        json.put("msg", message);
+        json.put("message", message);
         if(data!=null){
             json.put("data", data);
         }

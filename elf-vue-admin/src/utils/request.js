@@ -31,13 +31,20 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const code = response.status
-    if (code < 200 || code > 300) {
+    if (code == 200) {
+      if(response.data && response.data.code==0){
+        return response.data
+      }else{
+        Notification.error({
+          title: response.data.message
+        })
+        return Promise.reject('error')
+      }
+    } else {
       Notification.error({
         title: response.message
       })
       return Promise.reject('error')
-    } else {
-      return response.data
     }
   },
   error => {

@@ -3,7 +3,10 @@ package com.su.elf.auth.client.config;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author surongyao
@@ -38,5 +41,11 @@ public class JwtProperties {
 
     /** 续期时间 */
     private Long renew;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        // 密码加密方式
+        return new BCryptPasswordEncoder();
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.su.elf.auth.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.netflix.discovery.converters.Auto;
 import com.su.elf.auth.client.config.JwtProperties;
 import com.su.elf.auth.client.entity.AuthUser;
 import com.su.elf.auth.client.jwt.JwtTokenUtil;
@@ -20,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +47,8 @@ public class AuthController {
 
     private static final String CAPTCHA_KEY_PREFIX = "captcha:";
 
-
+    @Autowired
+    private PasswordEncoder bcryptPasswordEncoder;
     @Autowired
     private JwtProperties jwtProperties;
     @Autowired
@@ -59,7 +63,7 @@ public class AuthController {
 
     @ApiOperation("获取验证码")
     @RequestMapping("/captcha")
-    public ResponseEntity<Object>  captcha() throws Exception{
+    public ResponseMessage captcha() throws Exception{
         // 算术类型 https://gitee.com/whvse/EasyCaptcha
         ArithmeticCaptcha captcha = new ArithmeticCaptcha(200, 60);
         // 几位数运算，默认是两位
@@ -70,12 +74,12 @@ public class AuthController {
         // 保存
         redisDao.set(uuid, result, jwtProperties.getCodeExpiration(), TimeUnit.MINUTES);
         // 验证码信息
-        Map<String,Object> imgResult = new HashMap<String,Object>(2){{
+        JSONObject imgResult = new JSONObject(2){{
             put("img", captcha.toBase64());
             put("uuid", uuid);
         }};
 
-        return ResponseEntity.ok(imgResult);
+        return ResponseMessage.ok(imgResult);
     }
 
     @LogRecord("用户登录")
@@ -122,7 +126,7 @@ public class AuthController {
 
         AuthUser user = userService.loadUserByUsername(username);
         if(user!=null){
-            if(StringUtils.isNotEmpty(user.getPassword()) && user.getPassword().equals(password)){
+            if(StringUtils.isNotEmpty(user.getPassword()) && bcryptPasswordEncoder.matches(password, user.getPassword())){
                 // 生成令牌
                 String token = jwtTokenUtil.createToken(user);
                 // 保存在线信息

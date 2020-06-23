@@ -1,9 +1,9 @@
 spring:
   cloud:
     gateway:
-      httpclient:
-        connect-timeout: 2000
-        response-timeout: 5s
+#      httpclient:
+#        connect-timeout: 2000
+#        response-timeout: 5s
       routes:
       - id: sys_route
         uri: lb://system:8082
@@ -12,8 +12,8 @@ spring:
       - id: auth_route
         uri: lb://auth:8081
         predicates:
-        - Path=/auth/{segment},/online
-#        filters:
-#        - StripPrefix=1
+        - Path=/api/auth/{segment},/online
+        filters:
+        - StripPrefix=1
 
 
