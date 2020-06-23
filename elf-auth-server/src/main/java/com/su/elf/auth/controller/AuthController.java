@@ -147,7 +147,7 @@ public class AuthController {
     }
 
     @ApiOperation("退出登录")
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/logout", method = RequestMethod.DELETE)
     public ResponseMessage logout(HttpServletRequest request){
         onlineUserService.logout(request.getHeader("token"));
         return ResponseMessage.ok();
