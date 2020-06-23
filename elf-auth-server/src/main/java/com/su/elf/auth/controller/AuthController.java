@@ -4,13 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.su.elf.auth.client.config.JwtProperties;
 import com.su.elf.auth.client.entity.AuthUser;
 import com.su.elf.auth.client.jwt.JwtTokenUtil;
+import com.su.elf.auth.config.RsaProperties;
 import com.su.elf.auth.service.OnlineUserService;
 import com.su.elf.auth.service.UserService;
 import com.su.elf.common.CodeEnum;
-import com.su.elf.common.annotation.AnonymousAccess;
 import com.su.elf.common.entity.ResponseMessage;
 import com.su.elf.common.redis.RedisDao;
 import com.su.elf.common.utils.RegexUtil;
+import com.su.elf.common.utils.encrypt.RSAUtil;
 import com.su.elf.logging.annotation.LogRecord;
 import com.wf.captcha.ArithmeticCaptcha;
 import io.swagger.annotations.Api;
@@ -18,14 +19,13 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -59,12 +59,7 @@ public class AuthController {
 
     @ApiOperation("获取验证码")
     @RequestMapping("/captcha")
-    public void captcha(HttpServletResponse response) throws Exception{
-        response.setHeader("Cache-Control", "no-store");
-        response.setHeader("Pragma", "no-cache");
-        response.setDateHeader("Expires", 0);
-        response.setContentType("image/jpeg");
-
+    public ResponseEntity<Object>  captcha() throws Exception{
         // 算术类型 https://gitee.com/whvse/EasyCaptcha
         ArithmeticCaptcha captcha = new ArithmeticCaptcha(200, 60);
         // 几位数运算，默认是两位
@@ -80,10 +75,7 @@ public class AuthController {
             put("uuid", uuid);
         }};
 
-        ServletOutputStream responseOutputStream = response.getOutputStream();
-        captcha.out(responseOutputStream);
-        responseOutputStream.flush();
-        responseOutputStream.close();
+        return ResponseEntity.ok(imgResult);
     }
 
     @LogRecord("用户登录")
@@ -122,8 +114,11 @@ public class AuthController {
         }
 
         // 密码解密
-//        RSA rsa = new RSA(privateKey, null);
-//        password = new String(rsa.decrypt(password, KeyType.PrivateKey));
+        try {
+            password = RSAUtil.decryptByPrivateKey(RsaProperties.privateKey, password);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
 
         AuthUser user = userService.loadUserByUsername(username);
         if(user!=null){

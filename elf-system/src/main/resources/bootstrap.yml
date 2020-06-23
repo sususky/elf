@@ -1,7 +1,7 @@
 server:
   port: 8082
-  servlet:
-    context-path: /system
+#  servlet:
+#    context-path: /system
 
 spring:
   application:
