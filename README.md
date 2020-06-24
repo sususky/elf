@@ -15,13 +15,12 @@
 * elf-logging: 日志jar包，aop方式通过注解保存核心操作日志到数据库
 * elf-auth-server: 授权服务，采用jwt，springboot服务，8081端口
 * elf-system: 系统管理服务，8082端口
-
-* elf-page-admin: 后台静态页面
+* elf-vue-admin: 后台静态页面
 * elf-page-web: 前台静态页面
 
 
-目前只完成了登录和系统管理部分.
-在线演示地址: http://www.sususky.com/admin/login.html
+目前只完成了登录部分. 前端改成了vue来实现，后端研发不太擅长vue，找了个开源的抄了一下，还不完善。
+在线演示地址: http://www.sususky.com/admin
 用户名/密码: admin/admin
 
 
