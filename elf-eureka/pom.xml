@@ -10,7 +10,9 @@
 		<!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
 	</parent>
 
+	<groupId>com.su.elf</groupId>
 	<artifactId>elf-eureka</artifactId>
+	<version>${elf.version}</version>
 
 	<dependencies>
 		<dependency>

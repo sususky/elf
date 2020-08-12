@@ -4,12 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>elf</artifactId>
         <groupId>com.su</groupId>
+        <artifactId>elf</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.su.elf</groupId>
     <artifactId>elf-config</artifactId>
+    <version>${elf.version}</version>
 
     <dependencies>
         <dependency>

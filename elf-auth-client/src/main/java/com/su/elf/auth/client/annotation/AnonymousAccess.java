@@ -1,4 +1,4 @@
-package com.su.elf.common.annotation;
+package com.su.elf.auth.client.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
