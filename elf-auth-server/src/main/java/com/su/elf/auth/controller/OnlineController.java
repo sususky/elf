@@ -40,7 +40,7 @@ public class OnlineController {
     @GetMapping
     public ResponseMap query(HttpServletRequest request, String filter, Pageable pageable){
         log.info("userKey:{}", request.getHeader("userKey"));
-        return ResponseMap.ok(onlineUserService.getAll(filter, pageable));
+        return ResponseMap.success(onlineUserService.getAll(filter, pageable));
     }
 
     @LogRecord("导出数据")

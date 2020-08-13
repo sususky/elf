@@ -76,7 +76,7 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
 
     private Mono<Void> getVoidMono(ServerHttpResponse response, CodeEnum codeEnum) {
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
-        ResponseMap responseMap = ResponseMap.error(codeEnum);
+        ResponseMap responseMap = ResponseMap.failed(codeEnum);
         DataBuffer dataBuffer = response.bufferFactory().wrap(JSON.toJSONString(responseMap).getBytes());
         return response.writeWith(Flux.just(dataBuffer));
     }

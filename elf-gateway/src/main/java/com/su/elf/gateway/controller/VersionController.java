@@ -14,7 +14,7 @@ public class VersionController {
 
     @RequestMapping("/version")
     public ResponseMap welcome() {
-        return ResponseMap.ok().put("version", 1.0);
+        return ResponseMap.success().put("version", 1.0);
     }
 
 }

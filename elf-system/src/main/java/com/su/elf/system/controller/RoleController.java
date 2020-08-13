@@ -38,7 +38,7 @@ public class RoleController {
         JSONObject json = new JSONObject();
         json.put("count", total);
         json.put("list", list);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -46,7 +46,7 @@ public class RoleController {
         int id = roleService.insertPojo(role);
         JSONObject json = new JSONObject();
         json.put("id", id);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(value = "/{pid}", method = RequestMethod.DELETE)
@@ -54,7 +54,7 @@ public class RoleController {
         int result = roleService.deletePojo(pid);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
@@ -62,7 +62,7 @@ public class RoleController {
         int result = roleService.updatePojo(role);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
@@ -70,7 +70,7 @@ public class RoleController {
         Role role = roleService.getPojo(pid);
         JSONObject json = new JSONObject();
         json.put("role", role);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(value = "/{roleId}/privilege", method = RequestMethod.POST)
@@ -79,12 +79,12 @@ public class RoleController {
         System.out.println(roleId);
         System.out.println(privilegeIds);
         if(roleId==0){
-            return ResponseMap.error(CodeEnum.EMPTY_PARAM);
+            return ResponseMap.failed(CodeEnum.EMPTY_PARAM);
         }
         int result = roleService.updateRolePrivilege(roleId, privilegeIds);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
 }

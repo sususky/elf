@@ -22,17 +22,17 @@ public class GlobalExceptionHandler {
         if (e instanceof ApiException){
             log.error(e.getMessage());
             ApiException exception = (ApiException) e;
-            return ResponseMap.error(exception.getErrorCode(), exception.getMessage());
+            return ResponseMap.failed(exception.getErrorCode(), exception.getMessage());
         } else if(e instanceof ResourceAccessException){
             log.error(e.getMessage());
-            return ResponseMap.error(Constants.SERVER_ERROR, "服务调用失败");
+            return ResponseMap.failed(Constants.SERVER_ERROR, "服务调用失败");
         } else if (e instanceof HttpRequestMethodNotSupportedException){
             log.error(e.getMessage());
-            return ResponseMap.error(CodeEnum.METHOD_NOT_SUPPORTED);
+            return ResponseMap.failed(CodeEnum.METHOD_NOT_SUPPORTED);
         } else {
             //将系统异常以打印出来
             log.error(e.getMessage(), e);
-            return ResponseMap.error(Constants.SERVER_ERROR, "内部错误");
+            return ResponseMap.failed(Constants.SERVER_ERROR, "内部错误");
         }
 
     }

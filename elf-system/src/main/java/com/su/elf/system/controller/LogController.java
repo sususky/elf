@@ -34,7 +34,7 @@ public class LogController {
         JSONObject json = new JSONObject();
         json.put("count", total);
         json.put("list", list);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
 //    @RequestMapping(method = RequestMethod.POST)

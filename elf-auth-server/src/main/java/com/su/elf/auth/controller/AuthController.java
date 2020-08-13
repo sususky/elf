@@ -74,7 +74,7 @@ public class AuthController {
             put("uuid", uuid);
         }};
 
-        return ResponseMap.ok(imgResult);
+        return ResponseMap.success(imgResult);
     }
 
     @LogRecord("用户登录")
@@ -82,14 +82,14 @@ public class AuthController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseMap login(HttpServletRequest request, @RequestBody JSONObject args){
         if(args==null || args.isEmpty()){
-            return ResponseMap.error(CodeEnum.EMPTY_PARAM);
+            return ResponseMap.failed(CodeEnum.EMPTY_PARAM);
         }
         if(jwtProperties.getCaptchaOpen()!=null && jwtProperties.getCaptchaOpen()==1){
             String uuid = args.getString("uuid");
             String captcha = args.getString("captcha");
             String text = null; //(String) session.getAttribute("verifyCode");
             if(StringUtils.isAnyEmpty(uuid, captcha)){
-                return ResponseMap.error(CodeEnum.EMPTY_PARAM);
+                return ResponseMap.failed(CodeEnum.EMPTY_PARAM);
             }else{
                 text = redisDao.get(CAPTCHA_KEY_PREFIX + uuid);
                 // 清除验证码
@@ -97,19 +97,19 @@ public class AuthController {
             }
 
             if(StringUtils.isEmpty(text) || !text.equalsIgnoreCase(captcha)){
-                return ResponseMap.error(CodeEnum.ILLEGAL_PARAM.getCode(), "验证码不正确");
+                return ResponseMap.failed(CodeEnum.ILLEGAL_PARAM.getCode(), "验证码不正确");
             }
         }
 
         String username = args.getString("username");
         String password = args.getString("password");
         if(StringUtils.isAnyEmpty(username, password)){
-            return ResponseMap.error(CodeEnum.EMPTY_PARAM);
+            return ResponseMap.failed(CodeEnum.EMPTY_PARAM);
         }
 
         //校验用户名密码
         if(!RegexUtil.isRegexMatch(username, "^[A-Za-z0-9@#$-_.]{1,64}$")){
-            return ResponseMap.error(CodeEnum.ILLEGAL_PARAM.getCode(), "用户名格式不合法");
+            return ResponseMap.failed(CodeEnum.ILLEGAL_PARAM.getCode(), "用户名格式不合法");
         }
 
         // 密码解密
@@ -130,12 +130,12 @@ public class AuthController {
                 JSONObject json = new JSONObject();
                 json.put("token", token);
                 json.put("user", user);
-                return ResponseMap.ok(json);
+                return ResponseMap.success(json);
             }else{
-                return ResponseMap.error(CodeEnum.ILLEGAL_PARAM.getCode(), "密码错误");
+                return ResponseMap.failed(CodeEnum.ILLEGAL_PARAM.getCode(), "密码错误");
             }
         }else{
-            return ResponseMap.error(CodeEnum.NO_USER.getCode(), "用户不存在");
+            return ResponseMap.failed(CodeEnum.NO_USER.getCode(), "用户不存在");
         }
 
 
@@ -145,7 +145,7 @@ public class AuthController {
     @RequestMapping(value = "/logout", method = RequestMethod.DELETE)
     public ResponseMap logout(HttpServletRequest request){
         onlineUserService.logout(request.getHeader("token"));
-        return ResponseMap.ok();
+        return ResponseMap.success();
     }
 
 //    @RequestMapping("/oauth/logout")

@@ -38,7 +38,7 @@ public class PrivilegeController {
         JSONObject json = new JSONObject();
         json.put("count", total);
         json.put("list", list);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -46,7 +46,7 @@ public class PrivilegeController {
         int id = privilegeService.insertPojo(privilege);
         JSONObject json = new JSONObject();
         json.put("id", id);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(value = "/{pid}", method = RequestMethod.DELETE)
@@ -54,7 +54,7 @@ public class PrivilegeController {
         int result = privilegeService.deletePojo(pid);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
@@ -62,7 +62,7 @@ public class PrivilegeController {
         int result = privilegeService.updatePojo(privilege);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
@@ -70,7 +70,7 @@ public class PrivilegeController {
         Privilege privilege = privilegeService.getPojo(pid);
         JSONObject json = new JSONObject();
         json.put("privilege", privilege);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(value = "/role/{roleId}", method = RequestMethod.GET)
@@ -78,7 +78,7 @@ public class PrivilegeController {
         List<Privilege> list = privilegeService.getPrivilegeByRoleId(roleId);
         JSONObject json = new JSONObject();
         json.put("list", list);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
 }

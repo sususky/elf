@@ -16,14 +16,14 @@ public class ResponseMap extends HashMap<String, Object> {
     /**
      * 返回成功
      */
-    public static ResponseMap ok() {
+    public static ResponseMap success() {
         return msg(0, "success");
     }
 
     /**
      * 返回成功
      */
-    public static ResponseMap ok(String message) {
+    public static ResponseMap success(String message) {
         return msg(0, message);
     }
 
@@ -31,7 +31,7 @@ public class ResponseMap extends HashMap<String, Object> {
     /**
      * 返回成功
      */
-    public static ResponseMap ok(int code, String message) {
+    public static ResponseMap success(int code, String message) {
         return msg(code, message);
     }
 
@@ -39,36 +39,36 @@ public class ResponseMap extends HashMap<String, Object> {
     /**
      * 返回成功
      */
-    public static ResponseMap ok(JSONObject data) {
-        ResponseMap map = ok();
+    public static ResponseMap success(JSONObject data) {
+        ResponseMap map = success();
         return map.data(data);
     }
 
     /**
      * 返回失败
      */
-    public static ResponseMap error() {
+    public static ResponseMap failed() {
         return msg(-1,"error");
     }
     
     /**
      * 返回失败
      */
-    public static ResponseMap error(String message) {
+    public static ResponseMap failed(String message) {
         return msg(-1, message);
     }
 
     /**
      * 返回失败
      */
-    public static ResponseMap error(CodeEnum codeEnum) {
+    public static ResponseMap failed(CodeEnum codeEnum) {
         return msg(codeEnum.getCode(), codeEnum.getMsg());
     }
 
     /**
      * 返回失败
      */
-    public static ResponseMap error(int code, String message) {
+    public static ResponseMap failed(int code, String message) {
         return msg(code, message);
     }
 

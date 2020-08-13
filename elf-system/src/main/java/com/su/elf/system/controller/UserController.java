@@ -37,7 +37,7 @@ public class UserController {
         JSONObject json = new JSONObject();
         json.put("count", total);
         json.put("list", list);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -45,7 +45,7 @@ public class UserController {
         int id = userService.insertPojo(user);
         JSONObject json = new JSONObject();
         json.put("id", id);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(value = "/{pid}", method = RequestMethod.DELETE)
@@ -53,7 +53,7 @@ public class UserController {
         int result = userService.deletePojo(pid);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
@@ -61,7 +61,7 @@ public class UserController {
         int result = userService.updatePojo(user);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
     @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
@@ -69,7 +69,7 @@ public class UserController {
         User user = userService.getPojo(pid);
         JSONObject json = new JSONObject();
         json.put("user", user);
-        return ResponseMap.ok(json);
+        return ResponseMap.success(json);
     }
 
 }
