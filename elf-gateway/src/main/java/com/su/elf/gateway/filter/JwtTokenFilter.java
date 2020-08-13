@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 
 import com.su.elf.auth.client.jwt.JwtTokenUtil;
 import com.su.elf.common.CodeEnum;
-import com.su.elf.common.entity.ResponseMessage;
+import com.su.elf.common.entity.ResponseMap;
 import com.su.elf.common.utils.collection.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -76,8 +76,8 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
 
     private Mono<Void> getVoidMono(ServerHttpResponse response, CodeEnum codeEnum) {
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
-        ResponseMessage responseMessage = ResponseMessage.error(codeEnum);
-        DataBuffer dataBuffer = response.bufferFactory().wrap(JSON.toJSONString(responseMessage).getBytes());
+        ResponseMap responseMap = ResponseMap.error(codeEnum);
+        DataBuffer dataBuffer = response.bufferFactory().wrap(JSON.toJSONString(responseMap).getBytes());
         return response.writeWith(Flux.just(dataBuffer));
     }
 

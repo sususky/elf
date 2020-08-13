@@ -1,7 +1,6 @@
 package com.su.elf.auth.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.netflix.discovery.converters.Auto;
 import com.su.elf.auth.client.config.JwtProperties;
 import com.su.elf.auth.client.entity.AuthUser;
 import com.su.elf.auth.client.jwt.JwtTokenUtil;
@@ -9,7 +8,7 @@ import com.su.elf.auth.config.RsaProperties;
 import com.su.elf.auth.service.OnlineUserService;
 import com.su.elf.auth.service.UserService;
 import com.su.elf.common.CodeEnum;
-import com.su.elf.common.entity.ResponseMessage;
+import com.su.elf.common.entity.ResponseMap;
 import com.su.elf.common.redis.RedisDao;
 import com.su.elf.common.utils.RegexUtil;
 import com.su.elf.common.utils.encrypt.RSAUtil;
@@ -20,8 +19,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +26,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -63,7 +58,7 @@ public class AuthController {
 
     @ApiOperation("获取验证码")
     @RequestMapping("/captcha")
-    public ResponseMessage captcha() throws Exception{
+    public ResponseMap captcha() throws Exception{
         // 算术类型 https://gitee.com/whvse/EasyCaptcha
         ArithmeticCaptcha captcha = new ArithmeticCaptcha(200, 60);
         // 几位数运算，默认是两位
@@ -79,22 +74,22 @@ public class AuthController {
             put("uuid", uuid);
         }};
 
-        return ResponseMessage.ok(imgResult);
+        return ResponseMap.ok(imgResult);
     }
 
     @LogRecord("用户登录")
     @ApiOperation("登录授权")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseMessage login(HttpServletRequest request, @RequestBody JSONObject args){
+    public ResponseMap login(HttpServletRequest request, @RequestBody JSONObject args){
         if(args==null || args.isEmpty()){
-            return ResponseMessage.error(CodeEnum.EMPTY_PARAM);
+            return ResponseMap.error(CodeEnum.EMPTY_PARAM);
         }
         if(jwtProperties.getCaptchaOpen()!=null && jwtProperties.getCaptchaOpen()==1){
             String uuid = args.getString("uuid");
             String captcha = args.getString("captcha");
             String text = null; //(String) session.getAttribute("verifyCode");
             if(StringUtils.isAnyEmpty(uuid, captcha)){
-                return ResponseMessage.error(CodeEnum.EMPTY_PARAM);
+                return ResponseMap.error(CodeEnum.EMPTY_PARAM);
             }else{
                 text = redisDao.get(CAPTCHA_KEY_PREFIX + uuid);
                 // 清除验证码
@@ -102,19 +97,19 @@ public class AuthController {
             }
 
             if(StringUtils.isEmpty(text) || !text.equalsIgnoreCase(captcha)){
-                return ResponseMessage.error(CodeEnum.ILLEGAL_PARAM.getCode(), "验证码不正确");
+                return ResponseMap.error(CodeEnum.ILLEGAL_PARAM.getCode(), "验证码不正确");
             }
         }
 
         String username = args.getString("username");
         String password = args.getString("password");
         if(StringUtils.isAnyEmpty(username, password)){
-            return ResponseMessage.error(CodeEnum.EMPTY_PARAM);
+            return ResponseMap.error(CodeEnum.EMPTY_PARAM);
         }
 
         //校验用户名密码
         if(!RegexUtil.isRegexMatch(username, "^[A-Za-z0-9@#$-_.]{1,64}$")){
-            return ResponseMessage.error(CodeEnum.ILLEGAL_PARAM.getCode(), "用户名格式不合法");
+            return ResponseMap.error(CodeEnum.ILLEGAL_PARAM.getCode(), "用户名格式不合法");
         }
 
         // 密码解密
@@ -135,12 +130,12 @@ public class AuthController {
                 JSONObject json = new JSONObject();
                 json.put("token", token);
                 json.put("user", user);
-                return ResponseMessage.ok(json);
+                return ResponseMap.ok(json);
             }else{
-                return ResponseMessage.error(CodeEnum.ILLEGAL_PARAM.getCode(), "密码错误");
+                return ResponseMap.error(CodeEnum.ILLEGAL_PARAM.getCode(), "密码错误");
             }
         }else{
-            return ResponseMessage.error(CodeEnum.NO_USER.getCode(), "用户不存在");
+            return ResponseMap.error(CodeEnum.NO_USER.getCode(), "用户不存在");
         }
 
 
@@ -148,13 +143,13 @@ public class AuthController {
 
     @ApiOperation("退出登录")
     @RequestMapping(value = "/logout", method = RequestMethod.DELETE)
-    public ResponseMessage logout(HttpServletRequest request){
+    public ResponseMap logout(HttpServletRequest request){
         onlineUserService.logout(request.getHeader("token"));
-        return ResponseMessage.ok();
+        return ResponseMap.ok();
     }
 
 //    @RequestMapping("/oauth/logout")
-//    public ResponseMessage logout(HttpServletRequest request) {
+//    public ResponseMap logout(HttpServletRequest request) {
 //        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String token = request.getParameter("access_token");
 //        if (StringUtils.isNotEmpty(token)) {
@@ -167,7 +162,7 @@ public class AuthController {
 //            }
 //        }
 //
-//        return ResponseMessage.ok();
+//        return ResponseMap.ok();
 //    }
 
 

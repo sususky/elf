@@ -2,7 +2,7 @@ package com.su.elf.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.su.elf.common.CodeEnum;
-import com.su.elf.common.entity.ResponseMessage;
+import com.su.elf.common.entity.ResponseMap;
 import com.su.elf.common.entity.SearchParam;
 import com.su.elf.system.entity.Role;
 import com.su.elf.system.service.role.RoleService;
@@ -31,60 +31,60 @@ public class RoleController {
     RoleService roleService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseMessage getRoleList(SearchParam param){
+    public ResponseMap getRoleList(SearchParam param){
         param.setOffset((param.getPage()-1)*param.getLimit());
         List<Role> list = roleService.getList(param);
         int total = roleService.getCount(param);
         JSONObject json = new JSONObject();
         json.put("count", total);
         json.put("list", list);
-        return ResponseMessage.ok(json);
+        return ResponseMap.ok(json);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseMessage addRole(@RequestBody Role role){
+    public ResponseMap addRole(@RequestBody Role role){
         int id = roleService.insertPojo(role);
         JSONObject json = new JSONObject();
         json.put("id", id);
-        return ResponseMessage.ok(json);
+        return ResponseMap.ok(json);
     }
 
     @RequestMapping(value = "/{pid}", method = RequestMethod.DELETE)
-    public ResponseMessage deleteRole(@PathVariable int pid){
+    public ResponseMap deleteRole(@PathVariable int pid){
         int result = roleService.deletePojo(pid);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMessage.ok(json);
+        return ResponseMap.ok(json);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseMessage updateRole(@RequestBody Role role){
+    public ResponseMap updateRole(@RequestBody Role role){
         int result = roleService.updatePojo(role);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMessage.ok(json);
+        return ResponseMap.ok(json);
     }
 
     @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
-    public ResponseMessage getRole(@PathVariable int pid){
+    public ResponseMap getRole(@PathVariable int pid){
         Role role = roleService.getPojo(pid);
         JSONObject json = new JSONObject();
         json.put("role", role);
-        return ResponseMessage.ok(json);
+        return ResponseMap.ok(json);
     }
 
     @RequestMapping(value = "/{roleId}/privilege", method = RequestMethod.POST)
-    public ResponseMessage updateRolePrivilege(@PathVariable int roleId,
+    public ResponseMap updateRolePrivilege(@PathVariable int roleId,
                                                @RequestBody List<Integer> privilegeIds){
         System.out.println(roleId);
         System.out.println(privilegeIds);
         if(roleId==0){
-            return ResponseMessage.error(CodeEnum.EMPTY_PARAM);
+            return ResponseMap.error(CodeEnum.EMPTY_PARAM);
         }
         int result = roleService.updateRolePrivilege(roleId, privilegeIds);
         JSONObject json = new JSONObject();
         json.put("result", result);
-        return ResponseMessage.ok(json);
+        return ResponseMap.ok(json);
     }
 
 }

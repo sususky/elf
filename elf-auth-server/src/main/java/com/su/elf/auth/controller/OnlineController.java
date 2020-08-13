@@ -1,7 +1,7 @@
 package com.su.elf.auth.controller;
 
 import com.su.elf.auth.service.OnlineUserService;
-import com.su.elf.common.entity.ResponseMessage;
+import com.su.elf.common.entity.ResponseMap;
 import com.su.elf.logging.annotation.LogRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,9 +38,9 @@ public class OnlineController {
 
     @ApiOperation("查询在线用户")
     @GetMapping
-    public ResponseMessage query(HttpServletRequest request, String filter, Pageable pageable){
+    public ResponseMap query(HttpServletRequest request, String filter, Pageable pageable){
         log.info("userKey:{}", request.getHeader("userKey"));
-        return ResponseMessage.ok(onlineUserService.getAll(filter, pageable));
+        return ResponseMap.ok(onlineUserService.getAll(filter, pageable));
     }
 
     @LogRecord("导出数据")

@@ -1,6 +1,6 @@
 package com.su.elf.gateway.controller;
 
-import com.su.elf.common.entity.ResponseMessage;
+import com.su.elf.common.entity.ResponseMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class VersionController {
 
     @RequestMapping("/version")
-    public ResponseMessage welcome() {
-        return ResponseMessage.ok().put("version", 1.0);
+    public ResponseMap welcome() {
+        return ResponseMap.ok().put("version", 1.0);
     }
 
 }

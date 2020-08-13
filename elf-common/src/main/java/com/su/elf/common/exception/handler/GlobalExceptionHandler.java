@@ -2,7 +2,7 @@ package com.su.elf.common.exception.handler;
 
 import com.su.elf.common.CodeEnum;
 import com.su.elf.common.Constants;
-import com.su.elf.common.entity.ResponseMessage;
+import com.su.elf.common.entity.ResponseMap;
 import com.su.elf.common.exception.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -17,22 +17,22 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public ResponseMessage Handle(Exception e){
+    public ResponseMap Handle(Exception e){
 
         if (e instanceof ApiException){
             log.error(e.getMessage());
             ApiException exception = (ApiException) e;
-            return ResponseMessage.error(exception.getErrorCode(), exception.getMessage());
+            return ResponseMap.error(exception.getErrorCode(), exception.getMessage());
         } else if(e instanceof ResourceAccessException){
             log.error(e.getMessage());
-            return ResponseMessage.error(Constants.SERVER_ERROR, "服务调用失败");
+            return ResponseMap.error(Constants.SERVER_ERROR, "服务调用失败");
         } else if (e instanceof HttpRequestMethodNotSupportedException){
             log.error(e.getMessage());
-            return ResponseMessage.error(CodeEnum.METHOD_NOT_SUPPORTED);
+            return ResponseMap.error(CodeEnum.METHOD_NOT_SUPPORTED);
         } else {
             //将系统异常以打印出来
             log.error(e.getMessage(), e);
-            return ResponseMessage.error(Constants.SERVER_ERROR, "内部错误");
+            return ResponseMap.error(Constants.SERVER_ERROR, "内部错误");
         }
 
     }

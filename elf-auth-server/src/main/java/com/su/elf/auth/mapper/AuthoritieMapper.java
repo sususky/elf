@@ -1,4 +1,4 @@
-package com.su.elf.auth.server.mapper;
+package com.su.elf.auth.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
