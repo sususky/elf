@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@riophae/vue-treeselect": "^0.4.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "echarts": "^4.8.0",
     "echarts-gl": "^1.1.1",
